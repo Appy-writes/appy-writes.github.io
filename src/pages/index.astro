@@ -12,6 +12,8 @@ const allWork = sortWorkEntries(await getCollection("work"), "featured");
 const featuredWork = allWork.filter((entry) => entry.data.featured).slice(0, 6);
 const hero = siteData.heroOptions[siteData.selectedHeroOption];
 const selectedNiche = Astro.url.searchParams.get("niche") ?? "";
+const primaryNiches = nicheDefinitions.slice(0, 5);
+const secondaryNiches = nicheDefinitions.slice(5);
 ---
 
 <BaseLayout
@@ -30,21 +32,40 @@ const selectedNiche = Astro.url.searchParams.get("niche") ?? "";
   <section class="pb-14">
     <div class="page-shell">
       <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
-        <p class="eyebrow">Niches Atrayee has worked across</p>
-        <div class="mt-4 flex flex-wrap gap-3">
-          {nicheDefinitions.map((item) => (
-            <button
-              type="button"
-              class:list={[
-                "pill home-niche-button cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:border-[rgba(163,90,61,0.35)] hover:text-[var(--ink)]",
-                selectedNiche === item.slug && "is-active"
-              ]}
-              data-home-niche-button={item.slug}
-              aria-pressed={selectedNiche === item.slug ? "true" : "false"}
-            >
-              {item.label}
-            </button>
-          ))}
+        <h2 class="text-center font-['Fraunces'] text-2xl tracking-[-0.03em] text-[var(--accent)] md:text-3xl">
+          Niches Atrayee has worked across
+        </h2>
+        <div class="mt-5 space-y-3">
+          <div class="flex flex-wrap justify-center gap-3">
+            {primaryNiches.map((item) => (
+              <button
+                type="button"
+                class:list={[
+                  "home-niche-button cursor-pointer",
+                  selectedNiche === item.slug && "is-active"
+                ]}
+                data-home-niche-button={item.slug}
+                aria-pressed={selectedNiche === item.slug ? "true" : "false"}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+          <div class="flex flex-wrap justify-center gap-3">
+            {secondaryNiches.map((item) => (
+              <button
+                type="button"
+                class:list={[
+                  "home-niche-button cursor-pointer",
+                  selectedNiche === item.slug && "is-active"
+                ]}
+                data-home-niche-button={item.slug}
+                aria-pressed={selectedNiche === item.slug ? "true" : "false"}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>
