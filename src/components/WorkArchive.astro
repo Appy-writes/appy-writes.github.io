@@ -1,0 +1,126 @@
+---
+import type { CollectionEntry } from "astro:content";
+import WorkCard from "./WorkCard.astro";
+
+type Props = {
+  entries: CollectionEntry<"work">[];
+};
+
+const { entries } = Astro.props;
+const niches = [...new Set(entries.flatMap((entry) => entry.data.niche))].sort();
+const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort();
+---
+
+<section class="space-y-8">
+  <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
+    <div class="grid gap-5 lg:grid-cols-[1.8fr_1fr_1fr]">
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Search
+        <input
+          class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)] outline-none transition placeholder:text-[var(--muted)] focus:border-[rgba(163,90,61,0.5)]"
+          type="search"
+          name="search"
+          placeholder="Search titles, excerpts, or tags"
+          data-filter-search
+        />
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Niche
+        <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-filter-niche>
+          <option value="">All niches</option>
+          {niches.map((niche) => (
+            <option value={niche}>{niche.replaceAll("-", " ")}</option>
+          ))}
+        </select>
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Type
+        <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-filter-type>
+          <option value="">All types</option>
+          {workTypes.map((workType) => (
+            <option value={workType}>{workType.replaceAll("-", " ")}</option>
+          ))}
+        </select>
+      </label>
+    </div>
+
+    <div class="mt-5 flex flex-wrap gap-3 text-sm" data-active-filters></div>
+  </div>
+
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3" data-archive-grid>
+    {entries.map((entry) => (
+      <WorkCard entry={entry} />
+    ))}
+  </div>
+
+  <p class="hidden text-sm font-semibold text-[var(--muted)]" data-empty-state>
+    No samples match the current filters yet. Try a broader niche, format, or search term.
+  </p>
+
+</section>
+
+<script is:inline>
+  /** @type {HTMLInputElement | null} */
+  const searchInput = document.querySelector("[data-filter-search]");
+  /** @type {HTMLSelectElement | null} */
+  const nicheSelect = document.querySelector("[data-filter-niche]");
+  /** @type {HTMLSelectElement | null} */
+  const typeSelect = document.querySelector("[data-filter-type]");
+  /** @type {HTMLElement[]} */
+  const cards = Array.from(document.querySelectorAll("[data-card]"));
+  /** @type {HTMLElement | null} */
+  const grid = document.querySelector("[data-archive-grid]");
+  /** @type {HTMLElement | null} */
+  const emptyState = document.querySelector("[data-empty-state]");
+  /** @type {HTMLElement | null} */
+  const activeFilters = document.querySelector("[data-active-filters]");
+
+  /**
+   * @param {Record<string, string>} filters
+   */
+  function renderActiveFilters(filters) {
+    if (!activeFilters) return;
+    const items = Object.values(filters).filter(Boolean);
+    activeFilters.innerHTML = items.length
+      ? items.map((item) => `<span class="pill">${item}</span>`).join("")
+      : '<span class="text-sm text-[var(--muted)]">Use filters, search, and sort to explore the archive.</span>';
+  }
+
+  function applyFilters() {
+    const searchValue = (searchInput?.value || "").trim().toLowerCase();
+    const nicheValue = nicheSelect?.value || "";
+    const typeValue = typeSelect?.value || "";
+
+    const visibleCards = cards.filter((card) => {
+      const searchHaystack = `${card.dataset.title || ""} ${card.dataset.excerpt || ""} ${card.dataset.niches || ""}`.toLowerCase();
+      const matchesSearch = !searchValue || searchHaystack.includes(searchValue);
+      const matchesNiche = !nicheValue || (card.dataset.niches || "").split("|").includes(nicheValue);
+      const matchesType = !typeValue || card.dataset.workType === typeValue;
+      const show = matchesSearch && matchesNiche && matchesType;
+      card.classList.toggle("hidden", !show);
+      return show;
+    });
+
+    visibleCards.forEach((card) => grid?.appendChild(card));
+
+    renderActiveFilters({
+      search: searchValue ? `Search: ${searchValue}` : "",
+      niche: nicheValue ? `Niche: ${nicheValue.replaceAll("-", " ")}` : "",
+      type: typeValue ? `Type: ${typeValue.replaceAll("-", " ")}` : ""
+    });
+
+    emptyState?.classList.toggle("hidden", visibleCards.length !== 0);
+  }
+
+  [searchInput, nicheSelect, typeSelect].forEach((control) => {
+    control?.addEventListener("input", applyFilters);
+    control?.addEventListener("change", applyFilters);
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("niche") && nicheSelect) nicheSelect.value = params.get("niche");
+  if (params.get("type") && typeSelect) typeSelect.value = params.get("type");
+  applyFilters();
+</script>

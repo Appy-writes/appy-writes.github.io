@@ -1,0 +1,61 @@
+---
+type Props = {
+  eyebrow: string;
+  title: string;
+  copy: string;
+  primaryLabel: string;
+  primaryHref: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+  socialLinks?: Array<{ label: string; href: string; icon: "linkedin" | "instagram" | "email" }>;
+};
+
+const {
+  eyebrow,
+  title,
+  copy,
+  primaryLabel,
+  primaryHref,
+  secondaryLabel,
+  secondaryHref,
+  socialLinks = []
+} = Astro.props;
+---
+
+<section class="py-14 md:py-20">
+  <div class="page-shell">
+    <div class="card-surface overflow-hidden rounded-[2rem] p-8 md:p-12">
+      <div class="grid gap-8 md:grid-cols-[1.3fr_0.7fr] md:items-end">
+        <div class="space-y-4">
+          <p class="eyebrow">{eyebrow}</p>
+          <h2 class="max-w-3xl text-4xl tracking-[-0.03em] md:text-5xl">{title}</h2>
+          <p class="max-w-2xl text-base text-[var(--muted)] md:text-lg">{copy}</p>
+          {socialLinks.length > 0 && (
+            <div class="flex flex-wrap gap-3 pt-2">
+              {socialLinks.map((link) => (
+                <a class="pill transition hover:border-[rgba(163,90,61,0.35)] hover:text-[var(--ink)]" href={link.href} target="_blank" rel="noreferrer">
+                  {link.icon === "linkedin" && (
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M6.94 8.5V19H3.5V8.5h3.44ZM5.22 3A2 2 0 1 1 5.2 7a2 2 0 0 1 .02-4ZM20.5 12.58V19h-3.42v-5.93c0-1.49-.53-2.5-1.87-2.5-1.02 0-1.63.69-1.9 1.36-.1.24-.12.58-.12.92V19H9.77s.05-9.76 0-10.5h3.42v1.49l-.02.03h.02V10c.45-.7 1.25-1.7 3.04-1.7 2.22 0 3.89 1.45 3.89 4.57Z"/></svg>
+                  )}
+                  {link.icon === "instagram" && (
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.75A4 4 0 0 0 3.75 7.75v8.5a4 4 0 0 0 4 4h8.5a4 4 0 0 0 4-4v-8.5a4 4 0 0 0-4-4h-8.5ZM17.5 6.25a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 1.75A3.25 3.25 0 1 0 12 15.25 3.25 3.25 0 0 0 12 8.75Z"/></svg>
+                  )}
+                  {link.icon === "email" && (
+                    <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M3 5.75A2.75 2.75 0 0 1 5.75 3h12.5A2.75 2.75 0 0 1 21 5.75v12.5A2.75 2.75 0 0 1 18.25 21H5.75A2.75 2.75 0 0 1 3 18.25V5.75Zm2.1-.55 6.9 5.53 6.9-5.53a1 1 0 0 0-.65-.23H5.75c-.24 0-.47.08-.65.23Zm14.15 2.02-6.62 5.3a1 1 0 0 1-1.25 0L4.75 7.22v11.03c0 .55.45 1 1 1h12.5c.55 0 1-.45 1-1V7.22Z"/></svg>
+                  )}
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+        <div class="flex flex-wrap gap-3 md:justify-end">
+          <a class="button-primary" href={primaryHref}>{primaryLabel}</a>
+          {secondaryLabel && secondaryHref && (
+            <a class="button-secondary" href={secondaryHref}>{secondaryLabel}</a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

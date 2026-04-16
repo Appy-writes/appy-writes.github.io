@@ -1,0 +1,82 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
+import { absoluteUrl, withBase } from "../utils/content";
+import { siteData } from "../data/site";
+
+type Props = {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+};
+
+const {
+  title,
+  description,
+  image = "/og-default.svg",
+  schema
+} = Astro.props;
+
+const pageTitle = `${title} | ${siteData.name}`;
+const socialImage = absoluteUrl(image);
+const canonical = Astro.url.href;
+const defaultSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: siteData.name,
+  jobTitle: siteData.title,
+  email: siteData.email,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Kolkata",
+    addressCountry: "IN"
+  },
+  sameAs: [siteData.linkedin, siteData.instagram],
+  url: absoluteUrl()
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#f5efe6" />
+    <link rel="icon" href={withBase("/favicon.svg")} type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={siteData.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+
+    <script is:inline>
+      const savedTheme = localStorage.getItem("theme");
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = savedTheme ?? (systemPrefersDark ? "dark" : "light");
+    </script>
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema ?? defaultSchema)} />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,137 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { withBase } from "../utils/content";
+
+type Props = {
+  services: CollectionEntry<"services">[];
+};
+
+const { services } = Astro.props;
+const orderedServices = [...services].sort((a, b) => a.data.order - b.data.order);
+---
+
+<section class="space-y-6">
+  <div class="card-surface service-shell overflow-hidden rounded-[2rem] p-5 md:p-6 lg:h-[calc(100vh-12.5rem)]" data-service-selector data-service-shell data-service-active={orderedServices[0].slug}>
+    <div class="grid gap-6 lg:h-full lg:grid-cols-[0.62fr_1fr] lg:items-start">
+      <div class="space-y-4 lg:flex lg:h-full lg:flex-col">
+        <p class="eyebrow">What kind of content do you need?</p>
+        <h2 class="max-w-xl text-3xl tracking-[-0.03em] md:text-4xl">Pick the workstream closest to your brief.</h2>
+        <p class="max-w-lg text-sm text-[var(--muted)] md:text-base">
+          Click a service to see the offer, who it suits, and what is included.
+        </p>
+        <div class="flex flex-wrap gap-3 lg:flex-1 lg:content-start lg:flex-col lg:overflow-y-auto lg:pr-2" data-service-tabs>
+          {orderedServices.map((service, index) => (
+            <button
+              class={`service-tab rounded-full border px-4 py-3 text-left text-sm font-semibold transition lg:w-full ${index === 0 ? "is-active" : ""}`}
+              data-service-tab
+              data-service-target={service.slug}
+              aria-pressed={index === 0 ? "true" : "false"}
+              type="button"
+            >
+              {service.data.title}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div class="card-surface rounded-[1.8rem] border border-[var(--line)] bg-[var(--surface)]/90 p-5 md:p-6 lg:h-full lg:overflow-hidden" data-service-panel>
+        {orderedServices.map((service, index) => (
+          <article class="space-y-5 lg:flex lg:h-full lg:flex-col" data-service-content={service.slug} hidden={index !== 0}>
+            <div class="space-y-2">
+              <p class="text-sm font-bold uppercase tracking-[0.14em] text-[var(--accent)]">{service.data.title}</p>
+              <p class="max-w-3xl text-base leading-7 text-[var(--ink)] md:text-lg">{service.data.summary}</p>
+              <p class="max-w-3xl text-sm leading-6 text-[var(--muted)]">{service.data.fit}</p>
+            </div>
+
+            <div class="grid gap-4 lg:flex-1 lg:grid-cols-[0.84fr_1.16fr]">
+              <div class="rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface)]/88 p-4 md:p-5">
+                <p class="text-sm font-bold uppercase tracking-[0.14em] text-[var(--accent)]">Who it is for</p>
+                <p class="mt-3 text-sm leading-6 text-[var(--muted)]">{service.data.audience}</p>
+              </div>
+
+              <div class="rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface)]/88 p-4 md:p-5 lg:overflow-y-auto">
+                <p class="text-sm font-bold uppercase tracking-[0.14em] text-[var(--accent)]">What it includes</p>
+                <ul class="mt-3 space-y-2 pl-5 text-sm leading-6 text-[var(--muted)]">
+                  {service.data.includes.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <a class="button-primary" href={`${withBase("/contact/")}?service=${service.slug}`}>Start a conversation</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  /** @type {HTMLElement | null} */
+  const selector = document.querySelector("[data-service-selector]");
+  /** @type {HTMLButtonElement[]} */
+  const tabs = selector ? Array.from(selector.querySelectorAll("[data-service-tab]")) : [];
+  /** @type {HTMLElement[]} */
+  const panels = selector ? Array.from(selector.querySelectorAll("[data-service-content]")) : [];
+  /** @type {HTMLElement | null} */
+  const shell = selector?.querySelector("[data-service-shell]") ?? null;
+
+  const serviceThemes = {
+    light: {
+      "seo-blog-writing": "linear-gradient(135deg, rgba(252,249,244,0.98), rgba(238,232,223,0.92))",
+      "thought-leadership-long-form": "linear-gradient(135deg, rgba(248,244,238,0.98), rgba(231,224,216,0.92))",
+      "website-landing-page-copy": "linear-gradient(135deg, rgba(249,245,239,0.98), rgba(236,228,220,0.92))",
+      "email-newsletter-copy": "linear-gradient(135deg, rgba(246,243,238,0.98), rgba(230,224,216,0.92))",
+      "social-media-content": "linear-gradient(135deg, rgba(248,244,239,0.98), rgba(234,227,218,0.92))",
+      "content-strategy-refresh-support": "linear-gradient(135deg, rgba(249,245,240,0.98), rgba(235,229,221,0.92))"
+    },
+    dark: {
+      "seo-blog-writing": "linear-gradient(135deg, rgba(29,25,23,0.98), rgba(49,42,38,0.96))",
+      "thought-leadership-long-form": "linear-gradient(135deg, rgba(27,24,22,0.98), rgba(46,39,36,0.96))",
+      "website-landing-page-copy": "linear-gradient(135deg, rgba(30,26,24,0.98), rgba(51,43,39,0.96))",
+      "email-newsletter-copy": "linear-gradient(135deg, rgba(28,25,23,0.98), rgba(45,39,35,0.96))",
+      "social-media-content": "linear-gradient(135deg, rgba(27,24,22,0.98), rgba(44,38,34,0.96))",
+      "content-strategy-refresh-support": "linear-gradient(135deg, rgba(29,25,23,0.98), rgba(47,41,36,0.96))"
+    }
+  };
+
+  function themeMode() {
+    return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  }
+
+  /**
+   * @param {string | undefined} slug
+   */
+  function activateService(slug) {
+    if (!slug) return;
+
+    tabs.forEach((tab) => {
+      const active = tab.dataset.serviceTarget === slug;
+      tab.classList.toggle("is-active", active);
+      tab.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.serviceContent !== slug;
+    });
+
+    if (shell) {
+      shell.setAttribute("data-service-active", slug);
+      shell.style.backgroundImage = serviceThemes[themeMode()][slug] || serviceThemes[themeMode()]["seo-blog-writing"];
+    }
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => activateService(tab.dataset.serviceTarget));
+  });
+
+  const initialSlug = shell?.getAttribute("data-service-active") || tabs[0]?.dataset.serviceTarget;
+  activateService(initialSlug);
+
+  const observer = new MutationObserver(() => {
+    const activeSlug = shell?.getAttribute("data-service-active") || tabs.find((tab) => tab.getAttribute("aria-pressed") === "true")?.dataset.serviceTarget;
+    activateService(activeSlug);
+  });
+
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+</script>

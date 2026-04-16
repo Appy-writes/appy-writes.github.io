@@ -1,0 +1,66 @@
+---
+import { siteData } from "../data/site";
+import { withBase } from "../utils/content";
+
+const links = [
+  { href: withBase("/"), label: "Home" },
+  { href: withBase("/work/"), label: "Work" },
+  { href: withBase("/services/"), label: "Services" },
+  { href: withBase("/about/"), label: "About" },
+  { href: withBase("/contact/"), label: "Contact" }
+];
+---
+
+<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header-bg)] backdrop-blur-xl">
+  <div class="page-shell flex items-center justify-between gap-6 py-4">
+    <a href={withBase("/")} class="flex flex-col">
+      <span class="font-['Fraunces'] text-xl font-semibold tracking-[-0.03em]">{siteData.name}</span>
+      <span class="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">{siteData.title}</span>
+    </a>
+
+    <nav aria-label="Primary" class="hidden items-center gap-6 text-sm font-semibold text-[var(--muted)] md:flex">
+      {links.map((link) => (
+        <a href={link.href} class="transition-colors hover:text-[var(--ink)]">{link.label}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition hover:border-[var(--accent)]"
+        data-theme-toggle
+        aria-label="Toggle light and dark mode"
+      >
+        <span data-theme-icon="light">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M12 4.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V5.5a.75.75 0 0 1 .75-.75ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 1.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Zm6.5-6.25h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1 0-1.5ZM4 11.25h1.5a.75.75 0 0 1 0 1.5H4a.75.75 0 0 1 0-1.5Zm11.48-4.73 1.06-1.06a.75.75 0 0 1 1.06 1.06l-1.06 1.06a.75.75 0 1 1-1.06-1.06Zm-8.02 8.02 1.06-1.06a.75.75 0 1 1 1.06 1.06l-1.06 1.06a.75.75 0 0 1-1.06-1.06Zm9.08 1.06-1.06-1.06a.75.75 0 1 1 1.06-1.06l1.06 1.06a.75.75 0 1 1-1.06 1.06Zm-8.02-8.02-1.06-1.06a.75.75 0 0 1 1.06-1.06l1.06 1.06a.75.75 0 1 1-1.06 1.06Z"/></svg>
+        </span>
+        <span data-theme-icon="dark" class="hidden">
+          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M20.742 13.045a.75.75 0 0 0-.962-.91 7.501 7.501 0 0 1-9.916-9.916.75.75 0 0 0-.91-.962A9 9 0 1 0 20.742 13.045Z"/></svg>
+        </span>
+      </button>
+      <a href={withBase("/contact/")} class="button-primary hidden md:inline-flex">Start a Project</a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  const toggle = document.querySelector("[data-theme-toggle]");
+  const root = document.documentElement;
+  const lightIcon = document.querySelector('[data-theme-icon="light"]');
+  const darkIcon = document.querySelector('[data-theme-icon="dark"]');
+
+  function syncThemeIcons() {
+    const theme = root.dataset.theme || "light";
+    lightIcon?.classList.toggle("hidden", theme === "dark");
+    darkIcon?.classList.toggle("hidden", theme !== "dark");
+  }
+
+  toggle?.addEventListener("click", () => {
+    const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+    root.dataset.theme = nextTheme;
+    localStorage.setItem("theme", nextTheme);
+    syncThemeIcons();
+  });
+
+  syncThemeIcons();
+</script>

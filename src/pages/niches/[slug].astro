@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import WorkCard from "../../components/WorkCard.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { nicheDefinitions } from "../../data/site";
+import { isVisibleWorkEntry, withBase } from "../../utils/content";
+
+export async function getStaticPaths() {
+  return nicheDefinitions.map((niche) => ({
+    params: { slug: niche.slug },
+    props: { niche }
+  }));
+}
+
+const { niche } = Astro.props;
+const allWork = (await getCollection("work")).filter(isVisibleWorkEntry);
+const nicheEntries = allWork.filter((entry) => entry.data.niche.includes(niche.slug));
+---
+
+<BaseLayout
+  title={niche.label}
+  description={niche.summary}
+>
+  <section class="py-16 md:py-20">
+    <div class="page-shell space-y-5">
+      <a class="button-tertiary" href={withBase("/work/")}>Back to work archive</a>
+      <p class="eyebrow">Niche archive</p>
+      <h1 class="max-w-4xl text-5xl tracking-[-0.04em] md:text-7xl">{niche.label}</h1>
+      <p class="max-w-3xl text-base text-[var(--muted)] md:text-lg">{niche.summary}</p>
+      <p class="text-sm font-semibold text-[var(--accent)]">Best fit for: {niche.audience}</p>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {nicheEntries.map((entry) => (
+        <WorkCard entry={entry} />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

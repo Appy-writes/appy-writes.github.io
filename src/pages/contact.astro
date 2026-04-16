@@ -1,0 +1,25 @@
+---
+import BriefBuilder from "../components/BriefBuilder.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Atrayee Banerjee for SEO blog writing, thought leadership, website copy, email content, social media support, and content strategy engagements."
+>
+  <section class="py-16 md:py-20">
+    <div class="page-shell space-y-5">
+      <p class="eyebrow">Contact</p>
+      <h1 class="max-w-4xl text-5xl tracking-[-0.04em] md:text-7xl">Share the brief, the bottleneck, or the draft that needs a stronger voice.</h1>
+      <p class="max-w-3xl text-base text-[var(--muted)] md:text-lg">
+        This site is hosted statically, so the contact flow is built around direct email and a prefilled brief generator rather than a backend form.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell">
+      <BriefBuilder />
+    </div>
+  </section>
+</BaseLayout>

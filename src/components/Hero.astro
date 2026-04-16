@@ -1,0 +1,41 @@
+---
+type Props = {
+  eyebrow?: string;
+  headline: string;
+  subheadline: string;
+  primaryHref: string;
+  secondaryHref: string;
+  rightImage?: string;
+  rightImageAlt?: string;
+};
+
+const { eyebrow, headline, subheadline, primaryHref, secondaryHref, rightImage, rightImageAlt = "" } = Astro.props;
+---
+
+<section class="fade-up py-16 md:py-24">
+  <div class="page-shell grid gap-10 lg:grid-cols-[1.35fr_0.85fr] lg:items-center">
+    <div class="space-y-6">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h1 class="max-w-4xl text-5xl leading-[1.02] tracking-[-0.04em] md:text-7xl">{headline}</h1>
+      <p class="max-w-2xl text-lg text-[var(--muted)] md:text-xl">{subheadline}</p>
+      <div class="flex flex-wrap gap-4">
+        <a class="button-primary" href={primaryHref}>View Work</a>
+        <a class="button-secondary" href={secondaryHref}>Start a Project</a>
+      </div>
+    </div>
+
+    <div class="flex justify-center lg:justify-end">
+      {rightImage ? (
+        <div class="relative h-72 w-72 overflow-hidden rounded-full border border-[var(--line)] bg-[var(--surface)] p-2 shadow-[0_18px_44px_rgba(15,15,15,0.08)] md:h-84 md:w-84 lg:h-96 lg:w-96">
+          <img
+            src={rightImage}
+            alt={rightImageAlt}
+            class="h-full w-full rounded-full object-cover object-[center_22%]"
+          />
+        </div>
+      ) : (
+        <div class="h-72 w-72 rounded-full border border-[var(--line)] bg-[var(--surface)] md:h-84 md:w-84 lg:h-96 lg:w-96"></div>
+      )}
+    </div>
+  </div>
+</section>

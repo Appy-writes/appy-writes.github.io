@@ -1,0 +1,38 @@
+---
+import { getCollection } from "astro:content";
+import CTASection from "../components/CTASection.astro";
+import ServiceSelector from "../components/ServiceSelector.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../utils/content";
+
+const services = await getCollection("services");
+---
+
+<BaseLayout
+  title="Services"
+  description="Conversion-focused content services from Atrayee Banerjee, including SEO blogs, thought leadership, website copy, newsletters, social content, and content strategy support."
+>
+  <section class="py-8 md:py-10">
+    <div class="page-shell space-y-3">
+      <p class="eyebrow">Services</p>
+      <h1 class="max-w-3xl text-3xl tracking-[-0.04em] md:text-4xl">Useful writing support for teams that need clarity, consistency, and stronger content systems.</h1>
+      <p class="max-w-2xl text-sm text-[var(--muted)]">
+        Choose the kind of content support you need, and the page will narrow the offer into something easier to scan, compare, and act on.
+      </p>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell">
+      <ServiceSelector services={services} />
+    </div>
+  </section>
+
+  <CTASection
+    eyebrow="Need a cleaner scope?"
+    title="The fastest way to start is to send the project type, audience, timeline, and current bottleneck."
+    copy="If you already know the kind of content help you need, the next step is simply to connect and outline the brief."
+    primaryLabel="Connect with me"
+    primaryHref={withBase("/contact/")}
+  />
+</BaseLayout>

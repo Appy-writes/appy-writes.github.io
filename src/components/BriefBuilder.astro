@@ -1,0 +1,149 @@
+---
+import { siteData } from "../data/site";
+---
+
+<section class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+  <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
+    <p class="eyebrow">Project brief builder</p>
+    <h2 class="mt-3 text-4xl tracking-[-0.03em]">Generate a ready-to-send inquiry email.</h2>
+    <p class="mt-4 text-base text-[var(--muted)]">
+      Pick the kind of support you need, add a few details, and this builder will prepare a prefilled email without requiring a backend.
+    </p>
+
+    <div class="mt-6 space-y-4">
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Service needed
+        <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-brief-service>
+          <option value="SEO Blog Writing">SEO Blog Writing</option>
+          <option value="Thought Leadership & Long-Form Content">Thought Leadership & Long-Form Content</option>
+          <option value="Website & Landing Page Copy">Website & Landing Page Copy</option>
+          <option value="Email / Newsletter Copy">Email / Newsletter Copy</option>
+          <option value="Social Media Content">Social Media Content</option>
+          <option value="Content Strategy / Refresh Support">Content Strategy / Refresh Support</option>
+        </select>
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Industry
+        <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-brief-industry>
+          <option value="SaaS / B2B tech">SaaS / B2B tech</option>
+          <option value="Agency support">Agency support</option>
+          <option value="Finance / insurance">Finance / insurance</option>
+          <option value="Health / caregiving">Health / caregiving</option>
+          <option value="Beauty / wellness">Beauty / wellness</option>
+          <option value="Travel / lifestyle">Travel / lifestyle</option>
+          <option value="Other service business">Other service business</option>
+        </select>
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Timeline
+        <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-brief-timeline>
+          <option value="ASAP">ASAP</option>
+          <option value="Within 2 weeks">Within 2 weeks</option>
+          <option value="This month">This month</option>
+          <option value="Next month">Next month</option>
+          <option value="Planning ahead">Planning ahead</option>
+        </select>
+      </label>
+
+      <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
+        Project details
+        <textarea
+          class="min-h-36 rounded-[1.4rem] border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+          placeholder="What are you launching, refreshing, or trying to improve?"
+          data-brief-details
+        ></textarea>
+      </label>
+
+      <div class="flex flex-wrap gap-3">
+        <a class="button-primary" href={`mailto:${siteData.email}`} data-brief-mailto>Open drafted email</a>
+        <button class="button-secondary cursor-pointer" type="button" data-copy-email>Copy email address</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
+    <p class="eyebrow">Direct contact</p>
+    <h2 class="mt-3 text-4xl tracking-[-0.03em]">Prefer the simple version?</h2>
+    <div class="mt-6 space-y-4 text-[var(--muted)]">
+      <p>
+        Email:
+        <a class="font-semibold text-[var(--ink)]" href={`mailto:${siteData.email}`}> {siteData.email}</a>
+      </p>
+      <p>Phone: <span class="font-semibold text-[var(--ink)]">{siteData.phone}</span></p>
+      <p>
+        LinkedIn:
+        <a class="font-semibold text-[var(--ink)]" href={siteData.linkedin} target="_blank" rel="noreferrer"> Atrayee Banerjee</a>
+      </p>
+      <p>
+        Instagram:
+        <a class="font-semibold text-[var(--ink)]" href={siteData.instagram} target="_blank" rel="noreferrer"> @atrayee_appy</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script is:inline define:vars={{ email: siteData.email }}>
+  /** @type {HTMLSelectElement | null} */
+  const serviceSelect = document.querySelector("[data-brief-service]");
+  /** @type {HTMLSelectElement | null} */
+  const industrySelect = document.querySelector("[data-brief-industry]");
+  /** @type {HTMLSelectElement | null} */
+  const timelineSelect = document.querySelector("[data-brief-timeline]");
+  /** @type {HTMLTextAreaElement | null} */
+  const detailsInput = document.querySelector("[data-brief-details]");
+  /** @type {HTMLAnchorElement | null} */
+  const mailtoLink = document.querySelector("[data-brief-mailto]");
+  /** @type {HTMLButtonElement | null} */
+  const copyButton = document.querySelector("[data-copy-email]");
+
+  function updateBrief() {
+    const service = serviceSelect?.value || "Content support";
+    const industry = industrySelect?.value || "General";
+    const timeline = timelineSelect?.value || "Flexible";
+    const details = detailsInput?.value?.trim() || "Here is a short overview of the project:";
+    const subject = `${service} inquiry`;
+    const body = [
+      `Hi Atrayee,`,
+      ``,
+      `I am looking for ${service.toLowerCase()} support.`,
+      `Industry: ${industry}`,
+      `Timeline: ${timeline}`,
+      ``,
+      `${details}`,
+      ``,
+      `Best,`
+    ].join("\n");
+
+    const href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (mailtoLink instanceof HTMLAnchorElement) {
+      mailtoLink.href = href;
+    }
+  }
+
+  [serviceSelect, industrySelect, timelineSelect, detailsInput].forEach((field) => {
+    field?.addEventListener("input", updateBrief);
+    field?.addEventListener("change", updateBrief);
+  });
+
+  copyButton?.addEventListener("click", async () => {
+    try {
+      await navigator.clipboard.writeText(email);
+      copyButton.textContent = "Email copied";
+      window.setTimeout(() => {
+        copyButton.textContent = "Copy email address";
+      }, 1600);
+    } catch {
+      copyButton.textContent = "Copy failed";
+    }
+  });
+
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("service") && serviceSelect) {
+    const requestedService = params.get("service");
+    const option = Array.from(serviceSelect.options).find((item) => item.value.toLowerCase().includes(requestedService.replaceAll("-", " ")));
+    if (option) serviceSelect.value = option.value;
+  }
+  updateBrief();
+</script>

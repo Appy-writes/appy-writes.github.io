@@ -1,0 +1,157 @@
+---
+import { getCollection } from "astro:content";
+import CTASection from "../components/CTASection.astro";
+import Hero from "../components/Hero.astro";
+import NicheGrid from "../components/NicheGrid.astro";
+import WorkCard from "../components/WorkCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { nicheDefinitions, siteData } from "../data/site";
+import { sortWorkEntries, withBase } from "../utils/content";
+
+const allWork = sortWorkEntries(await getCollection("work"), "featured");
+const featuredWork = allWork.filter((entry) => entry.data.featured).slice(0, 6);
+const hero = siteData.heroOptions[siteData.selectedHeroOption];
+const selectedNiche = Astro.url.searchParams.get("niche") ?? "";
+---
+
+<BaseLayout
+  title="Content Strategist, SEO Writer, Editor"
+  description="Lead-generating portfolio site for Atrayee Banerjee, a content strategist, SEO writer, and editor serving SaaS, B2B tech, agencies, and service brands."
+>
+  <Hero
+    headline={hero.headline}
+    subheadline={hero.subheadline}
+    primaryHref={withBase("/work/")}
+    secondaryHref={withBase("/contact/")}
+    rightImage={withBase("/images/profile-portrait.jpg")}
+    rightImageAlt="Atrayee portrait"
+  />
+
+  <section class="pb-14">
+    <div class="page-shell">
+      <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
+        <p class="eyebrow">Niches Atrayee has worked across</p>
+        <div class="mt-4 flex flex-wrap gap-3">
+          {nicheDefinitions.map((item) => (
+            <button
+              type="button"
+              class:list={[
+                "pill home-niche-button cursor-pointer transition-all duration-300 hover:-translate-y-0.5 hover:border-[rgba(163,90,61,0.35)] hover:text-[var(--ink)]",
+                selectedNiche === item.slug && "is-active"
+              ]}
+              data-home-niche-button={item.slug}
+              aria-pressed={selectedNiche === item.slug ? "true" : "false"}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-14 md:pb-20">
+    <div class="page-shell">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="eyebrow">Featured work</p>
+          <h2 class="mt-3 text-5xl tracking-[-0.03em] md:text-6xl">A focused mix of SEO, editorial, and conversion-minded work.</h2>
+        </div>
+        <a class="button-secondary" href={withBase("/work/")}>See the full archive</a>
+      </div>
+
+      <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {featuredWork.map((entry) => (
+          <WorkCard entry={entry} compact={true} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="niche-overview" class="pb-14 md:pb-20 scroll-mt-28">
+    <div class="page-shell">
+      <div class="mb-8">
+        <p class="eyebrow">Niche overview</p>
+        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Work grouped the way hiring teams usually think.</h2>
+        <p class="mt-4 max-w-3xl text-base text-[var(--muted)] md:text-lg">
+          The archive is grouped into SaaS, tech and ops, finance and insurance, health, marketing, travel, website copy, broader editorial work, and campaign support so visitors can scan quickly for relevant experience.
+        </p>
+      </div>
+      <NicheGrid entries={allWork} activeSlug={selectedNiche} />
+    </div>
+  </section>
+
+  <section class="pb-14 md:pb-20">
+    <div class="page-shell grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+      <div class="space-y-4">
+        <p class="eyebrow">How Atrayee works</p>
+        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">Built for founders, marketers, and agency partners who need clarity fast.</h2>
+      </div>
+
+      <div class="grid gap-4">
+        {siteData.howIWork.map((step) => (
+          <article class="card-surface rounded-[1.5rem] p-6">
+            <h3 class="text-2xl tracking-[-0.03em]">{step.title}</h3>
+            <p class="mt-3 text-sm text-[var(--muted)]">{step.detail}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTASection
+    eyebrow="Ready to hire?"
+    title="Need writing that is strategic, readable, and actually useful to buyers?"
+    copy="Atrayee works across blog strategy, long-form content, website copy, newsletters, and campaign support for brands that want substance and momentum."
+    primaryLabel="Get in touch"
+    primaryHref={withBase("/contact/")}
+    secondaryLabel="Browse work"
+    secondaryHref={withBase("/work/")}
+    socialLinks={[
+      { label: "LinkedIn", href: siteData.linkedin, icon: "linkedin" },
+      { label: "Instagram", href: siteData.instagram, icon: "instagram" },
+      { label: "Email", href: `mailto:${siteData.email}`, icon: "email" }
+    ]}
+  />
+</BaseLayout>
+
+<script is:inline define:vars={{ selectedNiche }}>
+  const overviewSection = document.getElementById("niche-overview");
+  const buttons = Array.from(document.querySelectorAll("[data-home-niche-button]"));
+  const cards = Array.from(document.querySelectorAll("[data-niche-card]"));
+
+  /**
+   * @param {string} slug
+   */
+  function setActiveNiche(slug) {
+    buttons.forEach((button) => {
+      if (!(button instanceof HTMLElement)) return;
+      const active = button.dataset.homeNicheButton === slug;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    cards.forEach((card) => {
+      if (!(card instanceof HTMLElement)) return;
+      const active = card.dataset.nicheCard === slug;
+      card.classList.toggle("is-active", active);
+    });
+  }
+
+  if (selectedNiche) {
+    setActiveNiche(selectedNiche);
+  }
+
+  buttons.forEach((button) => {
+    if (!(button instanceof HTMLButtonElement)) return;
+    button.addEventListener("click", () => {
+      const slug = button.dataset.homeNicheButton;
+      if (!slug) return;
+      setActiveNiche(slug);
+      overviewSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+      const url = new URL(window.location.href);
+      url.searchParams.set("niche", slug);
+      window.history.replaceState({}, "", url.toString());
+    });
+  });
+</script>

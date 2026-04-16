@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteData } from "../data/site";
+import { withBase } from "../utils/content";
+---
+
+<BaseLayout
+  title="About"
+  description="About Atrayee Banerjee: background, editorial experience, industries, tools, and the perspective behind her content strategy work."
+  image="/images/deck-media/image11.png"
+>
+  <section class="py-16 md:py-20">
+    <div class="page-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+      <div class="card-surface overflow-hidden rounded-[2rem]">
+        <img src={withBase("/images/deck-media/image11.png")} alt="Atrayee Banerjee outdoors in the mountains" class="h-full w-full object-cover" />
+      </div>
+
+      <div class="space-y-5">
+        <p class="eyebrow">About</p>
+        <h1 class="max-w-4xl text-5xl tracking-[-0.04em] md:text-7xl">Warm, editorial, and strategic by instinct.</h1>
+        <p class="text-base text-[var(--muted)] md:text-lg">{siteData.aboutBio}</p>
+        <p class="text-base text-[var(--muted)] md:text-lg">{siteData.aboutPerspective}</p>
+        <div class="flex flex-wrap gap-3">
+          <a class="button-primary" href={withBase(siteData.resumePath)}>Download resume</a>
+          <a class="button-secondary" href={siteData.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
+      <div class="space-y-4">
+        <p class="eyebrow">Recent roles and responsibilities</p>
+        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">Experience across in-house strategy, agency execution, and editorial work.</h2>
+      </div>
+
+      <div class="grid gap-4">
+        {siteData.timeline.map((item) => (
+          <article class="card-surface rounded-[1.7rem] p-6">
+            <div class="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
+              <h3 class="text-2xl tracking-[-0.03em]">{item.company}</h3>
+              <p class="text-sm font-semibold text-[var(--accent)]">{item.period}</p>
+            </div>
+            <p class="mt-1 text-sm font-semibold text-[var(--muted)]">{item.role} | {item.location}</p>
+            <ul class="mt-4 space-y-2 pl-5 text-sm text-[var(--muted)]">
+              {item.points.map((point) => (
+                <li>{point}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell grid gap-6 lg:grid-cols-3">
+      <article class="card-surface rounded-[1.7rem] p-6">
+        <p class="eyebrow">Industries</p>
+        <p class="mt-3 text-sm text-[var(--muted)]">
+          SaaS, B2B operations, finance, insurance, health, caregiving, beauty, jewelry, migration, travel, marketing, and web growth.
+        </p>
+      </article>
+      <article class="card-surface rounded-[1.7rem] p-6">
+        <p class="eyebrow">Tools and process</p>
+        <div class="mt-4 flex flex-wrap gap-2">
+          {siteData.tools.map((tool) => (
+            <span class="pill">{tool}</span>
+          ))}
+        </div>
+      </article>
+      <article class="card-surface rounded-[1.7rem] p-6">
+        <p class="eyebrow">Education and languages</p>
+        <ul class="mt-4 space-y-2 text-sm text-[var(--muted)]">
+          {siteData.education.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+        <p class="mt-4 text-sm text-[var(--muted)]"><strong class="text-[var(--ink)]">Languages:</strong> {siteData.languages.join(", ")}</p>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
