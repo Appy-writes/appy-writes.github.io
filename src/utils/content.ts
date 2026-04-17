@@ -1,4 +1,5 @@
 import type { CollectionEntry } from "astro:content";
+import { nicheDefinitions } from "../data/site";
 
 export const workTypeLabels: Record<CollectionEntry<"work">["data"]["workType"], string> = {
   ghostwritten: "Ghostwritten",
@@ -14,8 +15,14 @@ export const statusLabels: Record<CollectionEntry<"work">["data"]["status"], str
   placeholder: "Placeholder from source deck"
 };
 
+const nicheDefinitionMap = new Map(nicheDefinitions.map((niche) => [niche.slug, niche]));
+
 export function withBase(path: string) {
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+}
+
+export function resolveAssetUrl(path: string) {
+  return /^https?:\/\//.test(path) ? path : withBase(path);
 }
 
 export function absoluteUrl(path = "") {
@@ -26,6 +33,18 @@ export function absoluteUrl(path = "") {
 
 export function isVisibleWorkEntry(entry: CollectionEntry<"work">) {
   return entry.data.workType !== "sample-set";
+}
+
+export function getNicheDefinitionBySlug(slug: string) {
+  return nicheDefinitionMap.get(slug);
+}
+
+export function getPrimaryNicheImage(niches: string[]) {
+  for (const niche of niches) {
+    const definition = getNicheDefinitionBySlug(niche);
+    if (definition?.image) return definition.image;
+  }
+  return "";
 }
 
 export function sortWorkEntries(entries: CollectionEntry<"work">[], mode: "featured" | "newest" | "niche" = "featured") {

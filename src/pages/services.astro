@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import CTASection from "../components/CTASection.astro";
+import MailMotion from "../components/MailMotion.astro";
 import ServiceSelector from "../components/ServiceSelector.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { withBase } from "../utils/content";
@@ -28,11 +28,25 @@ const services = await getCollection("services");
     </div>
   </section>
 
-  <CTASection
-    eyebrow="Need a cleaner scope?"
-    title="The fastest way to start is to send the project type, audience, timeline, and current bottleneck."
-    copy="If you already know the kind of content help you need, the next step is simply to connect and outline the brief."
-    primaryLabel="Connect with me"
-    primaryHref={withBase("/contact/")}
-  />
+  <section class="py-14 md:py-20">
+    <div class="page-shell">
+      <div class="card-surface overflow-hidden rounded-[2rem] p-8 md:p-12">
+        <div class="grid gap-10 md:grid-cols-[1.05fr_0.95fr] md:items-center">
+          <div class="space-y-4">
+            <p class="eyebrow">Need a cleaner scope?</p>
+            <h2 class="max-w-3xl text-4xl tracking-[-0.03em] md:text-5xl">
+              The fastest way to start is to send the project type, audience, timeline, and current bottleneck.
+            </h2>
+            <p class="max-w-2xl text-base text-[var(--muted)] md:text-lg">
+              If you already know the kind of content help you need, the next step is simply to connect and outline the brief.
+            </p>
+          </div>
+          <div class="service-mail-cta">
+            <MailMotion />
+            <a class="button-primary" href={withBase("/contact/")}>Connect with me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </BaseLayout>

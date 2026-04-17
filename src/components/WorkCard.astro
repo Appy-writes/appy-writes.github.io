@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { statusLabels, withBase, workTypeLabels } from "../utils/content";
+import { getPrimaryNicheImage, resolveAssetUrl, statusLabels, withBase, workTypeLabels } from "../utils/content";
 
 type Props = {
   entry: CollectionEntry<"work">;
@@ -11,10 +11,14 @@ const { entry, compact = false } = Astro.props;
 const metaLine = [entry.data.client, entry.data.publication].filter(Boolean).join(" / ");
 const similarHref = `${withBase("/work/")}?niche=${entry.data.niche[0] ?? ""}`;
 const sourceLabel = entry.data.externalUrl ? "Open source link" : entry.data.proofLabel || statusLabels[entry.data.status];
+const coverImage = entry.data.coverImage ?? getPrimaryNicheImage(entry.data.niche);
 ---
 
 <article
-  class="card-surface flex h-full flex-col overflow-hidden rounded-[1.7rem]"
+  class:list={[
+    "card-surface flex h-full flex-col overflow-hidden rounded-[1.7rem]",
+    compact && "featured-work-card horizon-sheen"
+  ]}
   data-card
   data-title={entry.data.title.toLowerCase()}
   data-excerpt={entry.data.excerpt.toLowerCase()}
@@ -24,9 +28,9 @@ const sourceLabel = entry.data.externalUrl ? "Open source link" : entry.data.pro
   data-featured={entry.data.featured ? "true" : "false"}
   data-date={entry.data.date ?? ""}
 >
-  {entry.data.coverImage ? (
+  {coverImage ? (
     <div class="aspect-[16/10] overflow-hidden border-b border-[var(--line)] bg-[var(--paper-strong)]">
-      <img src={withBase(entry.data.coverImage)} alt="" class="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]" loading="lazy" />
+      <img src={resolveAssetUrl(coverImage)} alt="" class="h-full w-full object-cover transition-transform duration-300 hover:scale-[1.02]" loading="lazy" />
     </div>
   ) : (
     <div class="relative flex aspect-[16/10] items-end overflow-hidden border-b border-[var(--line)] bg-[linear-gradient(135deg,rgba(163,90,61,0.18),rgba(50,70,60,0.18))] p-5">

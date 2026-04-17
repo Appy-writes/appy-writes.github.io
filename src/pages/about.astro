@@ -2,6 +2,14 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { siteData } from "../data/site";
 import { withBase } from "../utils/content";
+
+const companyPalette = [
+  { base: "#8f4c31", soft: "#bf876b" },
+  { base: "#9a5c40", soft: "#c18b71" },
+  { base: "#a86b4d", soft: "#cb9a7e" },
+  { base: "#7a5d50", soft: "#a88879" },
+  { base: "#6c4f43", soft: "#97776a" }
+];
 ---
 
 <BaseLayout
@@ -10,7 +18,7 @@ import { withBase } from "../utils/content";
   image="/images/deck-media/image11.png"
 >
   <section class="py-16 md:py-20">
-    <div class="page-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+    <div class="page-shell grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
       <div class="card-surface overflow-hidden rounded-[2rem]">
         <img src={withBase("/images/deck-media/image11.png")} alt="Atrayee Banerjee outdoors in the mountains" class="h-full w-full object-cover" />
       </div>
@@ -18,8 +26,11 @@ import { withBase } from "../utils/content";
       <div class="space-y-5">
         <p class="eyebrow">About</p>
         <h1 class="max-w-4xl text-5xl tracking-[-0.04em] md:text-7xl">Warm, editorial, and strategic by instinct.</h1>
-        <p class="text-base text-[var(--muted)] md:text-lg">{siteData.aboutBio}</p>
-        <p class="text-base text-[var(--muted)] md:text-lg">{siteData.aboutPerspective}</p>
+        <div class="space-y-4">
+          {siteData.aboutBio.split("\n\n").map((paragraph) => (
+            <p class="text-base text-[var(--muted)] md:text-lg">{paragraph}</p>
+          ))}
+        </div>
         <div class="flex flex-wrap gap-3">
           <a class="button-primary" href={withBase(siteData.resumePath)}>Download resume</a>
           <a class="button-secondary" href={siteData.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
@@ -29,27 +40,35 @@ import { withBase } from "../utils/content";
   </section>
 
   <section class="pb-16 md:pb-20">
-    <div class="page-shell grid gap-6 xl:grid-cols-[1.1fr_0.9fr]">
-      <div class="space-y-4">
+    <div class="page-shell">
+      <div class="about-experience-heading space-y-4">
         <p class="eyebrow">Recent roles and responsibilities</p>
         <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">Experience across in-house strategy, agency execution, and editorial work.</h2>
       </div>
 
-      <div class="grid gap-4">
-        {siteData.timeline.map((item) => (
-          <article class="card-surface rounded-[1.7rem] p-6">
-            <div class="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
-              <h3 class="text-2xl tracking-[-0.03em]">{item.company}</h3>
-              <p class="text-sm font-semibold text-[var(--accent)]">{item.period}</p>
-            </div>
-            <p class="mt-1 text-sm font-semibold text-[var(--muted)]">{item.role} | {item.location}</p>
-            <ul class="mt-4 space-y-2 pl-5 text-sm text-[var(--muted)]">
-              {item.points.map((point) => (
-                <li>{point}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
+      <div class="about-experience-grid mt-8 md:mt-10">
+        {siteData.timeline.map((item, index) => {
+          const palette = companyPalette[index % companyPalette.length];
+
+          return (
+            <article class="about-experience-card" style={`--experience-base:${palette.base}; --experience-soft:${palette.soft};`}>
+              <div class="about-experience-frame"></div>
+              <div class="about-experience-panel">
+                <div class="about-experience-topline"></div>
+                <div class="about-experience-meta">
+                  <p class="about-experience-period">{item.period}</p>
+                  <p class="about-experience-role">{item.role} | {item.location}</p>
+                </div>
+                <h3 class="about-experience-company">{item.company}</h3>
+                <ul class="about-experience-points">
+                  {item.points.map((point) => (
+                    <li>{point}</li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>

@@ -3,12 +3,22 @@ export type NicheDefinition = {
   label: string;
   summary: string;
   audience: string;
+  image: string;
+};
+
+export type SocialMediaItem = {
+  title: string;
+  brand: string;
+  format: string;
+  image: string;
+  alt: string;
+  note: string;
 };
 
 export const siteData = {
   name: "Atrayee Banerjee",
   title: "Content Strategist | SEO Writer | Editor",
-  location: "Kolkata, India",
+  location: "Manali, Himachal",
   email: "banerjee.atrayee14@gmail.com",
   phone: "+91 82409 90936",
   linkedin: "https://www.linkedin.com/in/atrayee-banerjee/",
@@ -18,7 +28,7 @@ export const siteData = {
     {
       headline: "Strategic content that helps the right readers trust you faster.",
       subheadline:
-        "Atrayee writes SEO blogs, thought leadership, website copy, and campaign content for SaaS teams, service businesses, and agencies that need clarity, credibility, and growth-minded messaging."
+        "I write across niches, turning brand ideas into simple, clear content that ranks, drives traffic, and supports lead generation."
     },
     {
       headline: "Editorial-grade content for brands that need sharper positioning and stronger search visibility.",
@@ -40,23 +50,38 @@ export const siteData = {
   ],
   howIWork: [
     {
-      title: "Start with search, audience, and offer clarity",
+      step: "Step 1",
+      title: "Start with intent, not just keywords",
       detail:
-        "Every project begins with intent, positioning, and what the reader actually needs to understand next."
+        "Before I start writing, I make sure I know who the content is for, what they want it to do, and why they are searching for it."
     },
     {
-      title: "Write with structure, voice, and conversion in mind",
+      step: "Step 2",
+      title: "Structure before writing",
       detail:
-        "That means crisp narratives, editorial discipline, and copy that respects both brand tone and user behavior."
+        "Every piece is mapped out with clear flow, hierarchy, and messaging so the content is easy to read, understand, and act on."
     },
     {
-      title: "Refine for publish-readiness",
+      step: "Step 3",
+      title: "Write for clarity, not complexity",
       detail:
-        "Atrayee brings experience with audits, content refreshes, SEO alignment, and feedback loops across agencies and in-house teams."
+        "I focus on simple, direct language that explains ideas clearly while keeping the brand voice consistent and engaging."
+    },
+    {
+      step: "Step 4",
+      title: "Optimise for search and AI visibility",
+      detail:
+        "The content is intended to work well and is organized in a way that makes it appear in AI-driven results and featured snippets."
+    },
+    {
+      step: "Step 5",
+      title: "Refine for performance",
+      detail:
+        "Final edits make sure the content is ready to go and is built to get results by focusing on readability, tone, and conversion."
     }
   ],
   aboutBio:
-    "Atrayee Banerjee is a Kolkata-based content strategist, SEO writer, and editor with 10+ years of experience across SaaS, B2B tech, finance, beauty, health, travel, and brand-led service businesses. Her work spans long-form articles, landing pages, website copy, email and campaign content, and editorial strategy shaped by real search behavior and a strong sense of voice.",
+    "I'm Atrayee Banerjee, and I write and plan content for SaaS, B2B tech, finance, health, and lifestyle brands.\n\nI've been writing SEO blogs, website content, and campaigns for agencies and global brands for the past few years. These projects have helped them make complicated ideas easier to understand and act on.\n\nBut my work isn't tied to one place.\nI'm always moving around. I like to travel, meet new people, and work with a variety of brands. Travel is a big part of how I think and create. It shapes how I observe, how I structure ideas, and how I bring a more human, grounded tone into my work.\n\nSimply put, I know my audience, make things clear, and make content that actually works. Everything I write is structured, purposeful, and works well, from blogs that are based on search to brand messaging.\n\nI also work with AI-driven workflows to make research and structure better. Whatever I do, I make sure the end result is always clear, natural, and human.",
   aboutPerspective:
     "Travel and writing appear repeatedly across the source materials, and that perspective shows up in the work: curiosity, texture, and an instinct for making information feel human rather than mechanical.",
   tools: [
@@ -135,66 +160,178 @@ export const siteData = {
 
 export const nicheDefinitions: NicheDefinition[] = [
   {
-    slug: "saas-ai-productivity",
-    label: "SaaS",
+    slug: "saas-b2b-tech",
+    label: "SaaS & B2B Tech",
     summary:
-      "Comparison posts, workflow articles, and search-led software writing for SaaS products.",
-    audience: "SaaS teams, AI products, and productivity brands"
+      "Search-led and product-focused writing for software companies, B2B platforms, and tech-led teams.",
+    audience: "SaaS companies, B2B tech teams, and product-led brands",
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "b2b-operations-procurement-compliance",
-    label: "Tech & Ops",
+    slug: "ai-emerging-tech",
+    label: "AI & Emerging Tech",
     summary:
-      "RFP, RFI, sourcing, procurement, and compliance-heavy content for operational buyers.",
-    audience: "B2B operations, procurement, and compliance teams"
+      "Content shaped around software workflows, digital tools, AI topics, and newer technology use cases.",
+    audience: "AI products, automation tools, and emerging tech brands",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "finance-insurance-risk",
+    slug: "finance-insurance",
     label: "Finance & Insurance",
     summary:
       "Risk, lending, insurance, and trust-building finance content written for clarity.",
-    audience: "Financial services, insurance, and advisory brands"
+    audience: "Financial services, insurance, and advisory brands",
+    image:
+      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "health-caregiving",
-    label: "Health",
-    summary:
-      "Readable health education and caregiving content with a practical, empathetic voice.",
-    audience: "Health publishers, clinics, and care brands"
-  },
-  {
-    slug: "marketing-seo-web-growth",
+    slug: "marketing-growth",
     label: "Marketing & Growth",
     summary:
-      "Search-minded brand content, web growth writing, and agency-friendly execution.",
-    audience: "Marketing teams, agencies, and growth-focused service brands"
+      "SEO-minded articles and growth content built around traffic, conversion, and visibility.",
+    audience: "Marketing teams, agencies, and growth-focused service brands",
+    image:
+      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "travel-migration-lifestyle",
+    slug: "website-brand-copy",
+    label: "Website & Brand Copy",
+    summary:
+      "Homepage, service, brand, and landing-page copy designed to make the offer clearer.",
+    audience: "Founders and businesses refreshing web presence and messaging",
+    image:
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    slug: "thought-leadership",
+    label: "Thought Leadership",
+    summary:
+      "Opinion-led, perspective-driven, and authority-building writing with a more editorial voice.",
+    audience: "Founders, experts, and brands building authority through perspective",
+    image:
+      "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    slug: "web3-blockchain",
+    label: "Web3 & Blockchain",
+    summary:
+      "Technology writing relevant to blockchain, crypto, and decentralized digital products.",
+    audience: "Web3 companies and blockchain-focused platforms",
+    image:
+      "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    slug: "travel-lifestyle",
     label: "Travel & Lifestyle",
     summary:
       "Travel, migration, and lifestyle writing shaped by observation, voice, and curiosity.",
-    audience: "Travel brands, lifestyle publishers, and migration services"
+    audience: "Travel brands, lifestyle publishers, and migration services",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "website-copy-brand-content",
-    label: "Website Copy & Brand Content",
+    slug: "health",
+    label: "Health",
     summary:
-      "Homepage, about, service, and product copy for brands that need a clearer story.",
-    audience: "Founders and brand-led businesses refreshing their web presence"
+      "Readable health education and caregiving content with a practical, empathetic voice.",
+    audience: "Health publishers, clinics, and care brands",
+    image:
+      "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "bylines-personal-essays",
-    label: "Misc",
+    slug: "fashion",
+    label: "Fashion",
     summary:
-      "Public-facing essays, bylines, and flexible editorial work that show voice and range.",
-    audience: "Editors, agencies, and clients evaluating voice and narrative depth"
+      "Style, apparel, and trend-led editorial content built for fashion and beauty audiences.",
+    audience: "Fashion labels, apparel brands, and style-led publishers",
+    image:
+      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=80"
   },
   {
-    slug: "social-email-campaigns",
-    label: "Campaigns & Newsletters",
+    slug: "automobile",
+    label: "Automobile",
     summary:
-      "Campaign support for social posts, calendars, newsletter drafts, and launch-oriented copy.",
-    audience: "Brands needing recurring campaign support"
+      "Transport- and auto-adjacent content written to answer practical reader questions clearly.",
+    audience: "Mobility brands, transport services, and automotive-adjacent publishers",
+    image:
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80"
+  },
+  {
+    slug: "miscellaneous",
+    label: "Miscellaneous",
+    summary:
+      "Flexible editorial work that shows range, voice, and adaptability beyond a single category.",
+    audience: "Editors, agencies, and clients evaluating range and narrative depth",
+    image:
+      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80"
+  }
+];
+
+export const socialMediaGallery: SocialMediaItem[] = [
+  {
+    title: "Sale announcement caption",
+    brand: "Nilis Jewellery",
+    format: "Instagram caption sample",
+    image: "/images/deck-media/image19.png",
+    alt: "Instagram caption screenshot for a Nilis Jewellery sale announcement",
+    note: "A caption-led promotional post with offer details, timing, location, and hashtag treatment."
+  },
+  {
+    title: "Festive jewellery creative",
+    brand: "Nilis Jewellery",
+    format: "Promotional feed creative",
+    image: "/images/deck-media/image41.png",
+    alt: "Promotional jewellery graphic for Nilis Jewellery with festive styling",
+    note: "A visual-first social tile built around occasion-driven messaging and brand recall."
+  },
+  {
+    title: "Wellness caption post",
+    brand: "VitSupp",
+    format: "Instagram caption sample",
+    image: "/images/deck-media/image20.png",
+    alt: "Instagram-style caption screenshot about castor oil benefits by VitSupp",
+    note: "An educational caption format that blends product relevance, readability, and platform-style hashtags."
+  },
+  {
+    title: "Haircare educational creative",
+    brand: "VitSupp",
+    format: "Feed visual",
+    image: "/images/deck-media/image50.png",
+    alt: "Haircare promotional graphic about castor oil and dandruff from VitSupp",
+    note: "An informational social graphic that packages a benefit-led hook into a more visual post format."
+  },
+  {
+    title: "Engagement ring visual",
+    brand: "Fabulously.in",
+    format: "Lifestyle product creative",
+    image: "/images/deck-media/image44.png",
+    alt: "Lifestyle social creative for diamond engagement rings by Fabulously.in",
+    note: "A softer editorial-style jewellery creative designed for scroll appeal and product mood."
+  },
+  {
+    title: "Engagement ring caption",
+    brand: "Fabulously.in",
+    format: "Instagram caption sample",
+    image: "/images/deck-media/image27.png",
+    alt: "Instagram caption screenshot for a Fabulously.in engagement ring post",
+    note: "A copy-led caption sample focused on elegance, symbolism, and a clear brand voice."
+  },
+  {
+    title: "Product benefit ad creative",
+    brand: "Homesure TileEx",
+    format: "Campaign visual",
+    image: "/images/deck-media/image14.png",
+    alt: "Tile adhesive promotional creative for Homesure TileEx",
+    note: "A promotional social asset that pairs a product shot with a direct benefit-led message."
+  },
+  {
+    title: "Construction brand visual",
+    brand: "MSP Premium",
+    format: "Brand campaign creative",
+    image: "/images/deck-media/image21.png",
+    alt: "Promotional creative for MSP Premium TMT bars",
+    note: "A campaign-style social creative built around category relevance and brand visibility."
   }
 ];

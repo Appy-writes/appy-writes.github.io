@@ -1,0 +1,28 @@
+---
+const fireflies = Array.from({ length: 28 }, (_, index) => {
+  const seed = index + 1;
+  return {
+    x1: `${(seed * 7) % 96 - 48}vw`,
+    y1: `${(seed * 11) % 92 - 46}vh`,
+    x2: `${(seed * 13) % 90 - 45}vw`,
+    y2: `${(seed * 17) % 88 - 44}vh`,
+    x3: `${(seed * 19) % 94 - 47}vw`,
+    y3: `${(seed * 23) % 90 - 45}vh`,
+    scale1: `${0.35 + ((seed * 3) % 50) / 100}`,
+    scale2: `${0.45 + ((seed * 5) % 40) / 100}`,
+    scale3: `${0.3 + ((seed * 7) % 45) / 100}`,
+    duration: `${14 + (seed % 9)}s`,
+    flash: `${5 + (seed % 6)}s`,
+    delay: `${(seed % 8) * 0.6}s`
+  };
+});
+---
+
+<div class="firefly-layer" aria-hidden="true">
+  {fireflies.map((firefly) => (
+    <span
+      class="firefly"
+      style={`--ff-x1:${firefly.x1};--ff-y1:${firefly.y1};--ff-x2:${firefly.x2};--ff-y2:${firefly.y2};--ff-x3:${firefly.x3};--ff-y3:${firefly.y3};--ff-s1:${firefly.scale1};--ff-s2:${firefly.scale2};--ff-s3:${firefly.scale3};--ff-duration:${firefly.duration};--ff-flash:${firefly.flash};--ff-delay:${firefly.delay};`}
+    ></span>
+  ))}
+</div>

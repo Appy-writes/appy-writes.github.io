@@ -3,39 +3,67 @@ import { siteData } from "../data/site";
 import { withBase } from "../utils/content";
 
 const links = [
-  { href: withBase("/"), label: "Home" },
-  { href: withBase("/work/"), label: "Work" },
-  { href: withBase("/services/"), label: "Services" },
-  { href: withBase("/about/"), label: "About" },
-  { href: withBase("/contact/"), label: "Contact" }
+  { href: withBase("/"), label: "Home", accentStart: "#8f4c31", accentEnd: "#c49a54" },
+  { href: withBase("/work/"), label: "Work", accentStart: "#32463c", accentEnd: "#8f4c31" },
+  { href: withBase("/services/"), label: "Services", accentStart: "#c49a54", accentEnd: "#8f4c31" },
+  { href: withBase("/about/"), label: "About", accentStart: "#7a5d50", accentEnd: "#32463c" },
+  { href: withBase("/contact/"), label: "Contact", accentStart: "#8f4c31", accentEnd: "#32463c" }
 ];
+
+const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[var(--header-bg)] backdrop-blur-xl">
+<header class="sticky top-0 z-40">
   <div class="page-shell flex items-center justify-between gap-6 py-4">
-    <a href={withBase("/")} class="flex flex-col">
+    <a href={withBase("/")} class="header-brand-block flex flex-col">
       <span class="font-['Fraunces'] text-xl font-semibold tracking-[-0.03em]">{siteData.name}</span>
       <span class="text-xs uppercase tracking-[0.18em] text-[var(--muted)]">{siteData.title}</span>
     </a>
 
-    <nav aria-label="Primary" class="hidden items-center gap-6 text-sm font-semibold text-[var(--muted)] md:flex">
-      {links.map((link) => (
-        <a href={link.href} class="transition-colors hover:text-[var(--ink)]">{link.label}</a>
-      ))}
+    <nav aria-label="Primary" class="hidden md:flex">
+      <ul class="animated-nav">
+        {links.map((link) => {
+          const isActive = currentPath === new URL(link.href, Astro.url).pathname;
+          return (
+            <li
+              class:list={["animated-nav-item", isActive && "is-active"]}
+              style={`--nav-start: ${link.accentStart}; --nav-end: ${link.accentEnd};`}
+            >
+              <a href={link.href} class="animated-nav-link" aria-current={isActive ? "page" : undefined}>
+                <span class="nav-initial" aria-hidden="true">{link.label.charAt(0)}</span>
+                <span class="title">{link.label}</span>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
 
     <div class="flex items-center gap-3">
       <button
         type="button"
-        class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--ink)] transition hover:border-[var(--accent)]"
+        class="theme-toggle-button"
         data-theme-toggle
         aria-label="Toggle light and dark mode"
+        title="Toggle light and dark mode"
       >
-        <span data-theme-icon="light">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M12 4.75a.75.75 0 0 1 .75.75v1.5a.75.75 0 0 1-1.5 0V5.5a.75.75 0 0 1 .75-.75ZM12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Zm0 1.5a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Zm6.5-6.25h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1 0-1.5ZM4 11.25h1.5a.75.75 0 0 1 0 1.5H4a.75.75 0 0 1 0-1.5Zm11.48-4.73 1.06-1.06a.75.75 0 0 1 1.06 1.06l-1.06 1.06a.75.75 0 1 1-1.06-1.06Zm-8.02 8.02 1.06-1.06a.75.75 0 1 1 1.06 1.06l-1.06 1.06a.75.75 0 0 1-1.06-1.06Zm9.08 1.06-1.06-1.06a.75.75 0 1 1 1.06-1.06l1.06 1.06a.75.75 0 1 1-1.06 1.06Zm-8.02-8.02-1.06-1.06a.75.75 0 0 1 1.06-1.06l1.06 1.06a.75.75 0 1 1-1.06 1.06Z"/></svg>
+        <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4.2"></circle>
+            <path d="M12 2.5v2.4"></path>
+            <path d="M12 19.1v2.4"></path>
+            <path d="M4.9 4.9l1.7 1.7"></path>
+            <path d="M17.4 17.4l1.7 1.7"></path>
+            <path d="M2.5 12h2.4"></path>
+            <path d="M19.1 12h2.4"></path>
+            <path d="M4.9 19.1l1.7-1.7"></path>
+            <path d="M17.4 6.6l1.7-1.7"></path>
+          </svg>
         </span>
-        <span data-theme-icon="dark" class="hidden">
-          <svg aria-hidden="true" viewBox="0 0 24 24" class="h-4 w-4 fill-current"><path d="M20.742 13.045a.75.75 0 0 0-.962-.91 7.501 7.501 0 0 1-9.916-9.916.75.75 0 0 0-.91-.962A9 9 0 1 0 20.742 13.045Z"/></svg>
+        <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.2 14.1A8.7 8.7 0 0 1 9.9 3.8a.7.7 0 0 0-.9-.9A9.7 9.7 0 1 0 21.1 15a.7.7 0 0 0-.9-.9Z"></path>
+          </svg>
         </span>
       </button>
       <a href={withBase("/contact/")} class="button-primary hidden md:inline-flex">Start a Project</a>
@@ -46,21 +74,10 @@ const links = [
 <script is:inline>
   const toggle = document.querySelector("[data-theme-toggle]");
   const root = document.documentElement;
-  const lightIcon = document.querySelector('[data-theme-icon="light"]');
-  const darkIcon = document.querySelector('[data-theme-icon="dark"]');
-
-  function syncThemeIcons() {
-    const theme = root.dataset.theme || "light";
-    lightIcon?.classList.toggle("hidden", theme === "dark");
-    darkIcon?.classList.toggle("hidden", theme !== "dark");
-  }
 
   toggle?.addEventListener("click", () => {
     const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
     root.dataset.theme = nextTheme;
     localStorage.setItem("theme", nextTheme);
-    syncThemeIcons();
   });
-
-  syncThemeIcons();
 </script>

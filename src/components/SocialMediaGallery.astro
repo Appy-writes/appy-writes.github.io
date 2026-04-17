@@ -1,0 +1,42 @@
+---
+import type { SocialMediaItem } from "../data/site";
+import { withBase } from "../utils/content";
+
+type Props = {
+  items: SocialMediaItem[];
+};
+
+const { items } = Astro.props;
+---
+
+<section id="social-media" class="social-gallery scroll-mt-32 space-y-8 md:scroll-mt-36">
+  <div class="space-y-6">
+    <div class="card-surface rounded-[2rem] p-6 text-center md:p-8">
+      <p class="eyebrow">Social Media</p>
+      <h2 class="mt-4 text-4xl tracking-[-0.04em] md:text-5xl">Campaign visuals and caption-led posts</h2>
+    </div>
+
+    <div class="social-gallery-grid">
+      {items.map((item) => (
+        <article class="social-gallery-card">
+          <div class="social-gallery-image-wrap">
+            <img
+              src={withBase(item.image)}
+              alt={item.alt}
+              class="social-gallery-image"
+              loading="lazy"
+            />
+          </div>
+          <div class="social-gallery-body">
+            <div class="social-gallery-meta">
+              <span class="pill">{item.brand}</span>
+              <span class="pill">{item.format}</span>
+            </div>
+            <h3 class="social-gallery-title">{item.title}</h3>
+            <p class="social-gallery-note">{item.note}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

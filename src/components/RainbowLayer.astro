@@ -1,0 +1,32 @@
+---
+const beams = Array.from({ length: 18 }, (_, index) => {
+  const palette = [
+    ["rgba(232,121,249,0.42)", "rgba(96,165,250,0.42)", "rgba(94,234,212,0.4)"],
+    ["rgba(96,165,250,0.42)", "rgba(94,234,212,0.4)", "rgba(232,121,249,0.42)"],
+    ["rgba(94,234,212,0.4)", "rgba(232,121,249,0.42)", "rgba(96,165,250,0.42)"]
+  ][index % 3];
+
+  return {
+    duration: `${34 + index * 1.7}s`,
+    delay: `${-1.9 * index}s`,
+    rotate: `${6 + (index % 5) * 2}deg`,
+    blurA: `${58 + (index % 4) * 10}px`,
+    blurB: `${42 + (index % 5) * 8}px`,
+    blurC: `${52 + (index % 3) * 12}px`,
+    colorA: palette[0],
+    colorB: palette[1],
+    colorC: palette[2]
+  };
+});
+---
+
+<div class="rainbow-layer" aria-hidden="true">
+  {beams.map((beam) => (
+    <span
+      class="rainbow-beam"
+      style={`--rainbow-duration:${beam.duration};--rainbow-delay:${beam.delay};--rainbow-rotate:${beam.rotate};--rainbow-blur-a:${beam.blurA};--rainbow-blur-b:${beam.blurB};--rainbow-blur-c:${beam.blurC};--rainbow-a:${beam.colorA};--rainbow-b:${beam.colorB};--rainbow-c:${beam.colorC};`}
+    ></span>
+  ))}
+  <span class="rainbow-glow-h"></span>
+  <span class="rainbow-glow-v"></span>
+</div>

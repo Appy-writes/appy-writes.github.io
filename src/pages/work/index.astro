@@ -2,28 +2,39 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import WorkArchive from "../../components/WorkArchive.astro";
+import SocialMediaGallery from "../../components/SocialMediaGallery.astro";
 import { sortWorkEntries } from "../../utils/content";
+import { socialMediaGallery } from "../../data/site";
 
 const entries = sortWorkEntries(await getCollection("work"), "featured");
 ---
 
 <BaseLayout
   title="Work"
-  description="Browse Atrayee Banerjee's portfolio across ghostwritten SEO articles, bylined essays, website copy, campaign support, and niche-focused writing samples."
+  description="Browse Atrayee Banerjee's work across SaaS, finance, marketing, website copy, travel, health, fashion, automotive, and more."
 >
   <section class="py-16 md:py-20">
     <div class="page-shell space-y-5">
       <p class="eyebrow">Portfolio archive</p>
       <h1 class="max-w-4xl text-5xl tracking-[-0.04em] md:text-7xl">Work that spans search visibility, editorial range, and conversion-focused copy.</h1>
       <p class="max-w-3xl text-base text-[var(--muted)] md:text-lg">
-        Filter by niche and type, search by topic, and open the published source links or nearby work directly from the archive.
+        Filter by niche and type, search by topic, and open public source links directly from the archive.
       </p>
+      <div class="pt-2">
+        <a class="button-secondary" href="#social-media">Social Media</a>
+      </div>
     </div>
   </section>
 
   <section class="pb-16 md:pb-20">
     <div class="page-shell">
       <WorkArchive entries={entries} />
+    </div>
+  </section>
+
+  <section class="pb-16 md:pb-20">
+    <div class="page-shell">
+      <SocialMediaGallery items={socialMediaGallery} />
     </div>
   </section>
 </BaseLayout>

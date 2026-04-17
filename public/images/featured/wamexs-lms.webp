@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <!-- Static SEO / Misc Tags -->
+  <title>Error Page</title>
+  <meta name="description" content="Error Page" />
+  <meta name="keywords" content="Error page" />
+  <meta name="author" content="https://wamexs.in/assets/uploads/blog/1776282667_caa84995e141fac1536e.webp" />
+  <meta name="robots" content="index, follow"/>
+  <meta name="rating" content="safe for kids"/>
+  <meta name="googlebot" content="index, follow"/>
+  <meta name="allow-search" content="yes"/>
+  <meta name="revisit-after" content="daily"/>
+  <meta name="language" content="en-US"/>
+  <meta name="distribution" content="global"/>
+  <meta name="msvalidate.01" content="EB6790C116706EE552B5606BA515B975" />
+  <link rel="canonical" href="https://wamexs.in/assets/uploads/blog/1776282667_caa84995e141fac1536e.webp" />
+
+  <!-- Favicons -->
+  <link href="https://wamexs.in/assets/img2/Site_logo.png" rel="icon">
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="https://wamexs.in/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://wamexs.in/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://wamexs.in/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="https://wamexs.in/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://wamexs.in/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://wamexs.in/assets/vendor/aos/aos.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="https://wamexs.in/assets/css/main.css" rel="stylesheet">
+
+  <!-- Google reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  
+     <meta name="google-site-verification" content="J7VtSJWmj0oYXb2SJdfoeUlhP_cvREMWJp6l78uB8_c" />
+    
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SESX38Q2C2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-SESX38Q2C2');
+    </script>
+    
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Webmark and Marketing Experts Pvt Ltd",
+  "alternateName": "WamexsIndia",
+  "url": "https://wamexs.in/",
+  "logo": "https://wamexs.in/assets/img2/Logo_white.png",
+  "description": "Webmark & Marketing Experts Pvt Ltd offers the best software development services in New Delhi, India. And, online marketing solution, digital marketing, SMO!",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "D-60, 3rd Floor, Nawada Housing Complex",
+    "addressLocality": "New Delhi",
+    "addressRegion": "Delhi",
+    "postalCode": "110059",
+    "addressCountry": "India"
+  },
+  "areaServed": [
+    "New Delhi", "Delhi"
+  ],
+  "telephone": "+91 8218422161",
+  "email": "support@wamexs.com",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91 8218422161",
+    "contactType": "Customer Service",
+    "areaServed": "India",
+    "availableLanguage": "English"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"
+      ],
+      "opens": "10:00",
+      "closes": "18:00"
+    }
+  ],
+  "sameAs": [
+    "https://www.facebook.com/people/Wamexs-India/100089493798957/",
+    "https://instagram.com/wamexsindia",
+    "https://twitter.com/Wamexssolution",
+    " https://www.linkedin.com/company/wamexs-india/"
+  ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What services does WAMEXS provide?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WAMEXS provides a wide range of services including Web Development, Mobile Application Development, Software Solutions, SEO, Digital Marketing, and Domain & Hosting Services in New Delhi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where is WAMEXS located?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WAMEXS is located in New Delhi, India, and serves businesses locally as well as internationally with customized digital solutions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WAMEXS offer mobile app development?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WAMEXS specializes in developing high-performance mobile applications for Android and iOS platforms with user-friendly designs and advanced features."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can WAMEXS help with SEO services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WAMEXS is an experienced SEO Agency in New Delhi that helps businesses improve search engine rankings, drive organic traffic, and generate quality leads."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WAMEXS provide domain and hosting services?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WAMEXS offers reliable domain registration and secure hosting services with 99.9% uptime, fast performance, and dedicated support."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can WAMEXS help in digital marketing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WAMEXS provides complete digital marketing services including SEO, PPC, Social Media Marketing, Email Marketing, and Content Marketing to grow your brand online."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does WAMEXS design custom websites?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, WAMEXS offers Creative Custom Website Design Services in New Delhi, building responsive, SEO-friendly, and visually appealing websites tailored to your business needs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I hire WAMEXS for eCommerce website development?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! WAMEXS specializes in eCommerce development, creating secure, scalable, and user-friendly online stores to boost sales and customer engagement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What makes WAMEXS different from other digital agencies?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "WAMEXS focuses on providing customized solutions, innovative designs, data-driven strategies, and round-the-clock support, making it a trusted partner for businesses in New Delhi and beyond."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can I contact WAMEXS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can contact WAMEXS at +91 8218422161 or visit their official website https://wamexs.in/ for more details."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:title" content="Webmark & Marketing Experts Pvt Ltd | SEO | Digital Marketing | Web Development Services in Delhi, India ">
+<meta property="og:description" content="Webmark & Marketing Experts Pvt Ltd provides the best web development services in New Delhi, India. We also offer responsive website design, SEO, PPC, SMO, and digital marketing etc.">
+<meta property="og:image" content=" https://wamexs.in/assets/img2/Logo_white.png">
+<meta property="og:url" content=" https://wamexs.in/">
+
+
+<!-- Twitter -->
+<meta property="og:title" content="Webmark & Marketing Experts Pvt Ltd">
+<meta property="og:description" content=" Webmark & Marketing Experts Pvt Ltd provides Responsive Website Design, online marketing, PPC, SMO, and website development in New Delhi, India.">
+<meta property="og:image" content=" https://wamexs.in/assets/img2/Logo_white.png ">
+<meta property="og:url" content=" https://wamexs.in/ ">
+
+
+  <!-- Hotjar Tracking Code -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:5068255,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+
+<body><style>
+p{
+    text-align: justify;
+}
+.error_message{
+    text-align: center;
+    padding: 60px 20px;
+}
+.error_message h1{
+    font-size: 80px;
+    color: #dc3545;
+    margin-bottom: 10px;
+}
+.error_message h2{
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+.error_message p{
+    font-size: 18px;
+    color: #555;
+    text-align: center;
+}
+.error_message a{
+    display: inline-block;
+    margin-top: 25px;
+    padding: 12px 30px;
+    background: #28a745;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.error_message a:hover{
+    background: #0d42ff;
+}
+</style>
+
+<main id="main">
+
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs">
+  <div class="page-header d-flex align-items-center" style="background-image: url('assets/img2/About_Us/page-header.jpg');">
+    <div class="container position-relative">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6 text-center">
+          <!-- 404 Heading -->
+          <h1 class="text-white" style="font-size: 56px; font-weight: 500;">404 Error</h1>
+          <p style="text-align:center;">
+            Oops! Page not found
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="https://wamexs.in/">Home</a></li>
+        <li>404</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+<!-- End Breadcrumbs -->
+
+<section class="about-section pt-120 pb-80">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+
+        <div class="error_message wow fadeInUp">
+          <h1>404</h1>
+          <h2>Page Not Found</h2>
+          <p>
+            The page you are looking for might have been removed,  
+            had its name changed, or is temporarily unavailable.
+          </p>
+
+          <a class="get-a-quote" href="https://wamexs.in/" style="background-color: #0d42ff" >Go Back to Home</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer overflow" style="margin-top:50px;">
+  <div class="container">
+  <div class="row gy-4">
+    <div class="col-lg-4 col-md-12 footer-info">
+      <img src="https://wamexs.in/assets/img2/Logo_white.png" class="logo d-flex align-items-center" alt="logo-white" width="320px">
+      </a>
+      <p>With the most stylish designs and innovative ideas, the team of Webmark & Marketing Experts Pvt Ltd has the capability to fight in this competitive market and take the company to the acme of success.</p>
+      <div class="social-links d-flex mt-4">
+        
+        <a href="https://www.facebook.com/wamexsindia/" target=_blank class="facebook"><i class="bi bi-facebook"></i></a>
+        <a href="https://instagram.com/wamexsindia?igshid=ZGUzMzM3NWJiOQ==" target=_blank class="instagram"><i class="bi bi-instagram"></i></a>
+        <a href="https://x.com/wamexsindia" target=_blank class="twitter"><i class="bi bi-twitter"></i></a>
+        <a href="https://www.linkedin.com/company/wamexs-india/ " target=_blank class="linkedin"><i class="bi bi-linkedin"></i></a>
+         <a href="https://www.youtube.com/@WamexsIndia" target="_blank" class="youtube">
+            <i class="bi bi-youtube"></i>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="col-lg-2 col-6 footer-links">
+      <h4>Useful Links</h4>
+      <ul>
+        <li><a href="https://wamexs.in/" class="">Home</a></li>
+        <li><a href="https://wamexs.in/about-us"><span class="">About Us</a></li>
+        <li><a href="https://wamexs.in/service"><span class="">Services</a></li>
+        <li><a href="https://wamexs.com/websiteportfolio" target="_blank">Portfolio</a></li>
+        <li><a href="https://wamexs.in/contact-us" class="">Contact Us</a></li>
+      </ul>
+    </div>
+    
+    <div class="col-lg-2 col-md-12 footer-contact text-center text-md-start">
+      <h4>Contact Us</h4>
+      <p style="text-align:left;">
+        <!-- India -->
+        <a href="tel:+91 821 842 2161" class="text-white">India : +91 821 842 2161</a><br>
+        <a href="mailto:support@wamexs.com" class="text-white">support@wamexs.com</a>
+        </p>
+
+        <!-- USA -->
+       <p style="text-align:left;">
+        <a href="tel:+1 800 930 4235" class="text-white">USA : +1 800 930 4235</a><br>
+        <a href="mailto:info@wamexs.com" class="text-white">info@wamexs.com</a>
+      </p>
+
+        <!-- UK -->
+     <p style="text-align:left;">
+        <a href="tel:+44 208 040 0311" class="text-white">UK : +1 731-419-4311</a><br>
+        <a href="mailto:support@wamexs.co.uk" class="text-white">support@wamexs.co.uk</a>
+      </p>
+      
+      <div>
+        <a href="https://rzp.io/rzp/hj4ZWA1" target="_blank">
+            <img src="https://wamexs.in/assets/img/makeapayment-300x99.jpeg" 
+                 alt="wamexs payment" 
+                 style="width: 200px; margin-top: 10px;">
+        </a>
+    </div>
+
+    </div>
+    
+    <div class="col-lg-4 col-md-12 text-lg-center">
+        <img src="https://wamexs.in/assets/img2/footer/world-map.webp" alt="World Map" class="img-fluid mb-3"> 
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <div class="p-2">
+                    <a href="https://wamexs.in/">
+                        <img src="https://wamexs.in/assets/uploads/contact/1752489967_f2b9e70cbc4344732269.gif" alt="India-flag" width="100px">
+                    </a>
+                </div>
+                <div class="p-2">
+                    <a href="http://wamexs.com/">
+                        <img src="https://wamexs.in/assets/uploads/contact/1752489967_8ac87682283192ac0c28.gif" alt="us-flag" width="100px">
+                    </a>
+                </div>
+                <div class="p-2">
+                    <a href="http://wamexs.co.uk/">
+                        <img src="https://wamexs.in/assets/uploads/contact/1752489967_a16c867f4a0be2d07d81.gif" alt="uk-flag" width="100px">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-lg-12">      
+    <div class="copyright">
+      &copy; Copyright <script type="text/javascript">document.write( new Date().getFullYear() );</script> <strong><span><a href="https://www.wamexs.com/" class="text-white" target="_blank"> Web and Marketing Experts LLC</a></span></strong>. All Rights Reserved    
+    </div>
+  </div>
+</div>
+
+</footer><!-- End Footer -->
+<!-- End Footer -->
+
+<!--<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i-->
+<!--  class="bi bi-arrow-up-short"></i></a>-->
+
+<!-- <div id="preloader"></div> -->
+
+<!-- Vendor JS Files -->
+<script src="https://wamexs.in/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="https://wamexs.in/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+<script src="https://wamexs.in/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="https://wamexs.in/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="https://wamexs.in/assets/vendor/aos/aos.js"></script>
+
+<!-- Template Main JS File -->
+<script src="https://wamexs.in/assets/js/main.js"></script>
+
+<!-- Contact form JS -->
+<!--<script src="https://wamexs.in/forms/contact.js"></script>-->
+
+<div id="calendly-sticky">
+    <a href="https://calendly.com/rahul-sharma-wamexs/wamexs-india-discovery-call" target="_blank">
+        <img src="https://wamexs.in/assets/img/calendly.webp" alt="calendly">
+    </a>
+</div>
+
+<div id="whatsapp-sticky">
+    <a href="https://api.whatsapp.com/send?phone=8218422161" target="_blank">
+        <img src="https://wamexs.in/assets/img/whatsapp.webp" alt="whatsapp">
+    </a>
+</div>
+
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6740902f4304e3196ae720f0/1ida36f96';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+
+</body>
+
+</html>
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <a href="https://wamexs.in/" class="logo d-flex align-items-center">
+      <!-- Uncomment the line below if you also wish to use an image logo -->
+      <img src="https://wamexs.in/assets/img2/Logo_white.png" alt="logo-white">
+    </a>
+    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <nav id="navbar" class="navbar">
+      <ul>
+        <li><a href="https://wamexs.in/" class="">Home</a></li>
+        <li><a href="https://wamexs.in/about-us" class="">About Us</a></li>
+        <li class="dropdown"><a href="https://wamexs.in/service"><span class="">Services</span> <i
+              class="bi bi-chevron-down dropdown-indicator "></i></a>
+          <ul class="scrollable-menu">
+            <li>
+  <a href="https://wamexs.in/service/marketing">
+    Marketing  </a>
+</li>
+            <li>
+  <a href="https://wamexs.in/service/designing">
+    Designing  </a>
+</li>
+            <li>
+  <a href="https://wamexs.in/service/domain-and-hosting">
+    Domain and Hosting  </a>
+</li>
+            <li>
+  <a href="https://wamexs.in/service/development">
+    Development  </a>
+</li>
+            <li>
+  <a href="https://wamexs.in/service/saas">
+    SaaS  </a>
+</li>
+                      </ul>
+        </li>
+        <li class="dropdown"><a href="https://www.wamexs.com/websiteportfolio" target="_blank"><span>Portfolio</span> <i
+              class="bi bi-chevron-down dropdown-indicator "></i></a>
+          <ul class="scrollable-menu">
+            <li><a href="https://www.wamexs.com/logoportfolio" target="_blank">Logo Designing</a></li>
+            <li><a href="https://www.wamexs.com/websiteportfolio" target="_blank">Website Development</a></li>
+            <li><a href="https://www.wamexs.com/mobileapplication" target="_blank">Mobile App Development</a></li>
+          </ul>
+        </li>
+
+        <li><a href="https://wamexs.in/blogs" class="">Blogs</a></li>
+        <li><a href="https://wamexs.in/media" class="">Media</a></li>
+        <li style="display: none;">
+          <a href="/prime-insights.php" class="">Hidden Media</a>
+        </li>
+
+        <li><a href="https://wamexs.in/contact-us" class="">Contact Us</a></li>
+        <li class="mobile-m-nav"><a class="get-a-quote" href="https://wamexs.com/social-media" target="_blank">Follow Us</a></li>
+        <li class="mobile-m-nav">
+          <!-- <a href="https://razorpay.me/@wamexs" class="get-a-quote" target="_blank">
+            <i class="bi bi-credit-card"></i> Pay
+          </a> -->
+        
+          <a href="https://rzp.io/rzp/hj4ZWA1" class="get-a-quote" target="_blank">
+            <i class="bi bi-credit-card"></i>&nbsp; Pay
+          </a>
+        </li>
+      </ul>
+    </nav><!-- .navbar -->
+
+  </div>
+</header>
+<!-- End Header -->

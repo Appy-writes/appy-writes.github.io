@@ -4,25 +4,25 @@ import { withBase } from "../utils/content";
 ---
 
 <footer class="mt-24 border-t border-[var(--line)] bg-[var(--surface)]">
-  <div class="page-shell grid gap-10 py-12 md:grid-cols-[1.6fr_1fr_1fr]">
+  <div class="page-shell grid gap-10 py-12 md:grid-cols-[1.7fr_1fr]">
     <div class="space-y-4">
-      <p class="font-['Fraunces'] text-2xl font-semibold tracking-[-0.03em]">{siteData.name}</p>
-      <p class="max-w-xl text-sm text-[var(--muted)]">
-        Strategic, editorial, and search-minded content for SaaS teams, service brands, and agencies that want stronger messaging and sharper content execution.
-      </p>
-      <div class="flex flex-wrap gap-3">
-        <a class="pill text-[var(--ink)]" href={`mailto:${siteData.email}`}>{siteData.email}</a>
-        <span class="pill text-[var(--ink)]">{siteData.location}</span>
+      <div class="flex items-start gap-4">
+        <img
+          src={withBase("/images/profile-portrait.jpg")}
+          alt="Atrayee Banerjee portrait"
+          class="h-16 w-16 rounded-full border border-[var(--line)] object-cover"
+        />
+        <div class="space-y-3">
+          <p class="font-['Fraunces'] text-2xl font-semibold tracking-[-0.03em]">{siteData.name}</p>
+          <p class="max-w-xl text-sm text-[var(--muted)]">
+            Open to freelance projects, collaborations, and full-time opportunities.
+          </p>
+          <div class="flex flex-wrap gap-3">
+            <a class="pill text-[var(--ink)]" href={`mailto:${siteData.email}`}>{siteData.email}</a>
+            <span class="pill text-[var(--ink)]">{siteData.location}</span>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="space-y-3">
-      <p class="text-sm font-bold uppercase tracking-[0.14em] text-[var(--accent)]">Explore</p>
-      <a class="block text-sm text-[var(--ink)]/82 hover:text-[var(--ink)]" href={withBase("/")}>Home</a>
-      <a class="block text-sm text-[var(--ink)]/82 hover:text-[var(--ink)]" href={withBase("/work/")}>Work</a>
-      <a class="block text-sm text-[var(--ink)]/82 hover:text-[var(--ink)]" href={withBase("/services/")}>Services</a>
-      <a class="block text-sm text-[var(--ink)]/82 hover:text-[var(--ink)]" href={withBase("/about/")}>About</a>
-      <a class="block text-sm text-[var(--ink)]/82 hover:text-[var(--ink)]" href={withBase("/contact/")}>Contact</a>
     </div>
 
     <div class="space-y-3">

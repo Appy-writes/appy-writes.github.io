@@ -12,8 +12,13 @@ const allWork = sortWorkEntries(await getCollection("work"), "featured");
 const featuredWork = allWork.filter((entry) => entry.data.featured).slice(0, 6);
 const hero = siteData.heroOptions[siteData.selectedHeroOption];
 const selectedNiche = Astro.url.searchParams.get("niche") ?? "";
-const primaryNiches = nicheDefinitions.slice(0, 5);
-const secondaryNiches = nicheDefinitions.slice(5);
+const stepPalette = [
+  { base: "#8f4c31", soft: "#bf876b" },
+  { base: "#9a5c40", soft: "#c18b71" },
+  { base: "#a86b4d", soft: "#cb9a7e" },
+  { base: "#7a5d50", soft: "#a88879" },
+  { base: "#6c4f43", soft: "#97776a" }
+];
 ---
 
 <BaseLayout
@@ -31,41 +36,24 @@ const secondaryNiches = nicheDefinitions.slice(5);
 
   <section class="pb-14">
     <div class="page-shell">
-      <div class="card-surface rounded-[1.8rem] p-6 md:p-8">
+      <div class="card-surface home-niche-panel rounded-[1.8rem] p-6 md:p-8">
         <h2 class="text-center font-['Fraunces'] text-2xl tracking-[-0.03em] text-[var(--accent)] md:text-3xl">
           Niches Atrayee has worked across
         </h2>
-        <div class="mt-5 space-y-3">
-          <div class="flex flex-wrap justify-center gap-3">
-            {primaryNiches.map((item) => (
-              <button
-                type="button"
-                class:list={[
-                  "home-niche-button cursor-pointer",
-                  selectedNiche === item.slug && "is-active"
-                ]}
-                data-home-niche-button={item.slug}
-                aria-pressed={selectedNiche === item.slug ? "true" : "false"}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-          <div class="flex flex-wrap justify-center gap-3">
-            {secondaryNiches.map((item) => (
-              <button
-                type="button"
-                class:list={[
-                  "home-niche-button cursor-pointer",
-                  selectedNiche === item.slug && "is-active"
-                ]}
-                data-home-niche-button={item.slug}
-                aria-pressed={selectedNiche === item.slug ? "true" : "false"}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
+        <div class="mx-auto mt-6 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {nicheDefinitions.map((item) => (
+            <button
+              type="button"
+              class:list={[
+                "home-niche-button cursor-pointer justify-self-center text-center",
+                selectedNiche === item.slug && "is-active"
+              ]}
+              data-home-niche-button={item.slug}
+              aria-pressed={selectedNiche === item.slug ? "true" : "false"}
+            >
+              {item.label}
+            </button>
+          ))}
         </div>
       </div>
     </div>
@@ -73,18 +61,25 @@ const secondaryNiches = nicheDefinitions.slice(5);
 
   <section class="pb-14 md:pb-20">
     <div class="page-shell">
-      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-        <div>
-          <p class="eyebrow">Featured work</p>
-          <h2 class="mt-3 text-5xl tracking-[-0.03em] md:text-6xl">A focused mix of SEO, editorial, and conversion-minded work.</h2>
-        </div>
-        <a class="button-secondary" href={withBase("/work/")}>See the full archive</a>
+      <div>
+        <p class="eyebrow">Featured work</p>
+        <h2 class="mt-3 text-5xl tracking-[-0.03em] md:text-6xl">A focused mix of SEO, editorial, and conversion-minded work.</h2>
       </div>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {featuredWork.map((entry) => (
-          <WorkCard entry={entry} compact={true} />
-        ))}
+        {featuredWork.length > 0 ? (
+          featuredWork.map((entry) => (
+            <WorkCard entry={entry} compact={true} />
+          ))
+        ) : (
+          <article class="card-surface rounded-[1.8rem] p-8 md:col-span-2 xl:col-span-3">
+            <p class="eyebrow">Portfolio refresh in progress</p>
+            <h3 class="mt-3 font-['Fraunces'] text-3xl tracking-[-0.03em]">New writing samples will be added here next.</h3>
+            <p class="mt-4 max-w-2xl text-base text-[var(--muted)]">
+              The archive is being reset for a fresh set of articles and case-study entries. For now, the site keeps the niche structure in place so future work can be added cleanly.
+            </p>
+          </article>
+        )}
       </div>
     </div>
   </section>
@@ -93,9 +88,9 @@ const secondaryNiches = nicheDefinitions.slice(5);
     <div class="page-shell">
       <div class="mb-8">
         <p class="eyebrow">Niche overview</p>
-        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Work grouped the way hiring teams usually think.</h2>
+        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Work, Organised By How Teams Actually Hire</h2>
         <p class="mt-4 max-w-3xl text-base text-[var(--muted)] md:text-lg">
-          The archive is grouped into SaaS, tech and ops, finance and insurance, health, marketing, travel, website copy, broader editorial work, and campaign support so visitors can scan quickly for relevant experience.
+          Explore my work across industries. Each section highlights how I adapt content based on audience, intent, and business goals.
         </p>
       </div>
       <NicheGrid entries={allWork} activeSlug={selectedNiche} />
@@ -103,19 +98,34 @@ const secondaryNiches = nicheDefinitions.slice(5);
   </section>
 
   <section class="pb-14 md:pb-20">
-    <div class="page-shell grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-      <div class="space-y-4">
+    <div class="page-shell">
+      <div class="process-heading space-y-4">
         <p class="eyebrow">How Atrayee works</p>
-        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">Built for founders, marketers, and agency partners who need clarity fast.</h2>
+        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">A Structured Approach To Content That Performs</h2>
       </div>
 
-      <div class="grid gap-4">
-        {siteData.howIWork.map((step) => (
-          <article class="card-surface rounded-[1.5rem] p-6">
-            <h3 class="text-2xl tracking-[-0.03em]">{step.title}</h3>
-            <p class="mt-3 text-sm text-[var(--muted)]">{step.detail}</p>
-          </article>
-        ))}
+      <div class="process-steps-grid mt-8 md:mt-10">
+        {siteData.howIWork.map((step, index) => {
+          const palette = stepPalette[index % stepPalette.length];
+          const stepNumber = String(index + 1).padStart(2, "0");
+
+          return (
+            <article
+              class="process-step-card"
+              style={`--step-base:${palette.base}; --step-soft:${palette.soft};`}
+            >
+              <div class="process-step-frame"></div>
+              <div class="process-step-panel">
+                <div class="process-step-badge">
+                  <span class="process-step-badge-label">Step</span>
+                  <span class="process-step-badge-number">{stepNumber}</span>
+                </div>
+                <h3 class="process-step-title">{step.title}</h3>
+                <p class="process-step-copy">{step.detail}</p>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
@@ -123,7 +133,6 @@ const secondaryNiches = nicheDefinitions.slice(5);
   <CTASection
     eyebrow="Ready to hire?"
     title="Need writing that is strategic, readable, and actually useful to buyers?"
-    copy="Atrayee works across blog strategy, long-form content, website copy, newsletters, and campaign support for brands that want substance and momentum."
     primaryLabel="Get in touch"
     primaryHref={withBase("/contact/")}
     secondaryLabel="Browse work"

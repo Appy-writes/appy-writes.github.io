@@ -26,12 +26,25 @@ const { eyebrow, headline, subheadline, primaryHref, secondaryHref, rightImage, 
 
     <div class="flex justify-center lg:justify-end">
       {rightImage ? (
-        <div class="hero-portrait-frame relative h-72 w-72 overflow-hidden rounded-full border-2 p-2 shadow-[0_18px_44px_rgba(15,15,15,0.08)] md:h-84 md:w-84 lg:h-96 lg:w-96">
-          <img
-            src={rightImage}
-            alt={rightImageAlt}
-            class="h-full w-full rounded-full object-cover object-[center_22%]"
-          />
+        <div class="hero-portrait-card h-[24rem] w-72 md:h-[28rem] md:w-84 lg:h-[31rem] lg:w-96">
+          <div class="hero-portrait-slide hero-portrait-slide-media">
+            <div class="hero-portrait-frame relative h-72 w-72 overflow-hidden rounded-full border-2 p-2 shadow-[0_18px_44px_rgba(15,15,15,0.08)] md:h-84 md:w-84 lg:h-96 lg:w-96">
+              <img
+                src={rightImage}
+                alt={rightImageAlt}
+                class="h-full w-full rounded-full object-cover object-[center_22%]"
+              />
+            </div>
+          </div>
+
+          <div class="hero-portrait-slide hero-portrait-slide-note">
+            <div class="hero-portrait-note card-surface rounded-[1.35rem] px-5 py-4">
+              <p class="text-xs font-bold uppercase tracking-[0.14em] text-[var(--accent)]">Welcome</p>
+              <p class="mt-2 text-sm leading-6 text-[var(--ink)]">
+                Hey, I am your Content Strategist. Have a look around, keeps things sharp and worth the scroll.
+              </p>
+            </div>
+          </div>
         </div>
       ) : (
         <div class="h-72 w-72 rounded-full border border-[var(--line)] bg-[var(--surface)] md:h-84 md:w-84 lg:h-96 lg:w-96"></div>

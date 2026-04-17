@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { nicheDefinitions } from "../data/site";
 import WorkCard from "./WorkCard.astro";
 
 type Props = {
@@ -7,8 +8,16 @@ type Props = {
 };
 
 const { entries } = Astro.props;
-const niches = [...new Set(entries.flatMap((entry) => entry.data.niche))].sort();
 const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort();
+const nicheLabelMap = Object.fromEntries(nicheDefinitions.map((niche) => [niche.slug, niche.label]));
+const searchSuggestions = Array.from(new Set(
+  entries.flatMap((entry) => [
+    entry.data.title,
+    ...entry.data.tags,
+    entry.data.client,
+    entry.data.publication
+  ].filter(Boolean) as string[])
+)).sort((a, b) => a.localeCompare(b));
 ---
 
 <section class="space-y-8">
@@ -22,15 +31,22 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
           name="search"
           placeholder="Search titles, excerpts, or tags"
           data-filter-search
+          list="work-search-suggestions"
+          autocomplete="off"
         />
+        <datalist id="work-search-suggestions" data-search-suggestions>
+          {searchSuggestions.slice(0, 3).map((suggestion) => (
+            <option value={suggestion}></option>
+          ))}
+        </datalist>
       </label>
 
       <label class="flex flex-col gap-2 text-sm font-semibold text-[var(--ink)]">
         Niche
         <select class="rounded-2xl border border-[var(--line)] bg-[var(--paper-strong)] px-4 py-3 text-sm font-medium text-[var(--ink)]" data-filter-niche>
           <option value="">All niches</option>
-          {niches.map((niche) => (
-            <option value={niche}>{niche.replaceAll("-", " ")}</option>
+          {nicheDefinitions.map((niche) => (
+            <option value={niche.slug}>{niche.label}</option>
           ))}
         </select>
       </label>
@@ -61,9 +77,11 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
 
 </section>
 
-<script is:inline>
+<script is:inline define:vars={{ nicheLabelMap }}>
   /** @type {HTMLInputElement | null} */
   const searchInput = document.querySelector("[data-filter-search]");
+  /** @type {HTMLDataListElement | null} */
+  const suggestionsList = document.querySelector("[data-search-suggestions]");
   /** @type {HTMLSelectElement | null} */
   const nicheSelect = document.querySelector("[data-filter-niche]");
   /** @type {HTMLSelectElement | null} */
@@ -76,6 +94,36 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
   const emptyState = document.querySelector("[data-empty-state]");
   /** @type {HTMLElement | null} */
   const activeFilters = document.querySelector("[data-active-filters]");
+  const suggestionPool = /** @type {string[]} */ (JSON.parse(`${
+    JSON.stringify(searchSuggestions)
+  }`));
+
+  /**
+   * @param {string} value
+   */
+  function updateSuggestions(value) {
+    if (!suggestionsList) return;
+
+    const query = value.trim().toLowerCase();
+    const matches = suggestionPool
+      .filter((item) => {
+        const normalized = item.toLowerCase();
+        return query ? normalized.includes(query) : true;
+      })
+      .sort((a, b) => {
+        const aLower = a.toLowerCase();
+        const bLower = b.toLowerCase();
+        const aStarts = query ? aLower.startsWith(query) : false;
+        const bStarts = query ? bLower.startsWith(query) : false;
+        if (aStarts !== bStarts) return aStarts ? -1 : 1;
+        return a.length - b.length || a.localeCompare(b);
+      })
+      .slice(0, 3);
+
+    suggestionsList.innerHTML = matches
+      .map((item) => `<option value="${item.replace(/"/g, "&quot;")}"></option>`)
+      .join("");
+  }
 
   /**
    * @param {Record<string, string>} filters
@@ -85,7 +133,7 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
     const items = Object.values(filters).filter(Boolean);
     activeFilters.innerHTML = items.length
       ? items.map((item) => `<span class="pill">${item}</span>`).join("")
-      : '<span class="text-sm text-[var(--muted)]">Use filters, search, and sort to explore the archive.</span>';
+      : '<span class="text-sm text-[var(--muted)]">New portfolio samples will appear here once they are added.</span>';
   }
 
   function applyFilters() {
@@ -107,7 +155,7 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
 
     renderActiveFilters({
       search: searchValue ? `Search: ${searchValue}` : "",
-      niche: nicheValue ? `Niche: ${nicheValue.replaceAll("-", " ")}` : "",
+      niche: nicheValue ? `Niche: ${nicheLabelMap[nicheValue] ?? nicheValue}` : "",
       type: typeValue ? `Type: ${typeValue.replaceAll("-", " ")}` : ""
     });
 
@@ -119,8 +167,11 @@ const workTypes = [...new Set(entries.map((entry) => entry.data.workType))].sort
     control?.addEventListener("change", applyFilters);
   });
 
+  searchInput?.addEventListener("input", () => updateSuggestions(searchInput.value));
+
   const params = new URLSearchParams(window.location.search);
   if (params.get("niche") && nicheSelect) nicheSelect.value = params.get("niche");
   if (params.get("type") && typeSelect) typeSelect.value = params.get("type");
+  updateSuggestions(searchInput?.value || "");
   applyFilters();
 </script>
