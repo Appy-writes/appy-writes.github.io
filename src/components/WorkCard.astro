@@ -16,7 +16,7 @@ const coverImage = entry.data.coverImage ?? getPrimaryNicheImage(entry.data.nich
 
 <article
   class:list={[
-    "card-surface flex h-full flex-col overflow-hidden rounded-[1.7rem]",
+    "card-surface overflow-hidden rounded-[1.7rem]",
     compact && "featured-work-card horizon-sheen"
   ]}
   data-card
@@ -43,7 +43,7 @@ const coverImage = entry.data.coverImage ?? getPrimaryNicheImage(entry.data.nich
     </div>
   )}
 
-  <div class="flex h-full flex-col p-6">
+  <div class="p-6">
     <div class="flex flex-wrap gap-2">
       {entry.data.niche.slice(0, 2).map((tag) => (
         <span class="pill">{tag.replaceAll("-", " ")}</span>

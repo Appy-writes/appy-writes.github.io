@@ -3,7 +3,6 @@ import { siteData } from "../data/site";
 import { withBase } from "../utils/content";
 
 const links = [
-  { href: withBase("/"), label: "Home", accentStart: "#8f4c31", accentEnd: "#c49a54" },
   { href: withBase("/work/"), label: "Work", accentStart: "#32463c", accentEnd: "#8f4c31" },
   { href: withBase("/services/"), label: "Services", accentStart: "#c49a54", accentEnd: "#8f4c31" },
   { href: withBase("/about/"), label: "About", accentStart: "#7a5d50", accentEnd: "#32463c" },
@@ -30,7 +29,6 @@ const currentPath = Astro.url.pathname;
               style={`--nav-start: ${link.accentStart}; --nav-end: ${link.accentEnd};`}
             >
               <a href={link.href} class="animated-nav-link" aria-current={isActive ? "page" : undefined}>
-                <span class="nav-initial" aria-hidden="true">{link.label.charAt(0)}</span>
                 <span class="title">{link.label}</span>
               </a>
             </li>

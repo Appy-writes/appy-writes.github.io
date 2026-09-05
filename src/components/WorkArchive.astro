@@ -77,7 +77,7 @@ const searchSuggestions = Array.from(new Set(
 
 </section>
 
-<script is:inline define:vars={{ nicheLabelMap }}>
+<script is:inline define:vars={{ nicheLabelMap, searchSuggestions }}>
   /** @type {HTMLInputElement | null} */
   const searchInput = document.querySelector("[data-filter-search]");
   /** @type {HTMLDataListElement | null} */
@@ -94,9 +94,7 @@ const searchSuggestions = Array.from(new Set(
   const emptyState = document.querySelector("[data-empty-state]");
   /** @type {HTMLElement | null} */
   const activeFilters = document.querySelector("[data-active-filters]");
-  const suggestionPool = /** @type {string[]} */ (JSON.parse(`${
-    JSON.stringify(searchSuggestions)
-  }`));
+  const suggestionPool = /** @type {string[]} */ (searchSuggestions);
 
   /**
    * @param {string} value
