@@ -15,6 +15,16 @@ export type SocialMediaItem = {
   note: string;
 };
 
+export type ProofOfWorkItem = {
+  type: "AI Overview" | "Search performance";
+  title: string;
+  brand: string;
+  image: string;
+  alt: string;
+  note: string;
+  href?: string;
+};
+
 export const siteData = {
   name: "Atrayee Banerjee",
   title: "Content Strategist | SEO Writer | Editor",
@@ -28,7 +38,7 @@ export const siteData = {
     {
       headline: "Strategic content that helps the right readers trust you faster.",
       subheadline:
-        "I write across niches, turning brand ideas into simple, clear content that ranks, drives traffic, and supports lead generation."
+        "Content that gets found, gets read, and gets people to act—showing up in search, AI Overviews, and everywhere your buyers look, across SaaS, finance, health, and beyond."
     },
     {
       headline: "Editorial-grade content for brands that need sharper positioning and stronger search visibility.",
@@ -51,42 +61,81 @@ export const siteData = {
   howIWork: [
     {
       step: "Step 1",
-      title: "Start with intent, not just keywords",
+      title: "Research the intent",
       detail:
-        "Before I start writing, I make sure I know who the content is for, what they want it to do, and why they are searching for it."
+        "I start by understanding who's reading, what they need, and why they searched for it in the first place."
     },
     {
       step: "Step 2",
-      title: "Structure before writing",
+      title: "Map the structure",
       detail:
-        "Every piece is mapped out with clear flow, hierarchy, and messaging so the content is easy to read, understand, and act on."
+        "Every piece gets a clear flow and hierarchy before a single sentence is written—so the reader never gets lost."
     },
     {
       step: "Step 3",
-      title: "Write for clarity, not complexity",
+      title: "Write for clarity",
       detail:
-        "I focus on simple, direct language that explains ideas clearly while keeping the brand voice consistent and engaging."
+        "Simple, direct language that respects the reader's time, without losing the brand's voice."
     },
     {
       step: "Step 4",
-      title: "Optimise for search and AI visibility",
+      title: "Build for visibility",
       detail:
-        "The content is intended to work well and is organized in a way that makes it appear in AI-driven results and featured snippets."
+        "Structured to rank in search, surface in featured snippets, and show up in AI-generated answers."
     },
     {
       step: "Step 5",
-      title: "Refine for performance",
+      title: "Edit for results",
       detail:
-        "Final edits make sure the content is ready to go and is built to get results by focusing on readability, tone, and conversion."
+        "A final pass for readability, tone, and conversion—so the content doesn't just read well, it performs."
     }
   ],
   aboutBio:
     "I'm Atrayee Banerjee, and I write and plan content for SaaS, B2B tech, finance, health, and lifestyle brands.\n\nI've been writing SEO blogs, website content, and campaigns for agencies and global brands for the past few years. These projects have helped them make complicated ideas easier to understand and act on.\n\nBut my work isn't tied to one place.\nI'm always moving around. I like to travel, meet new people, and work with a variety of brands. Travel is a big part of how I think and create. It shapes how I observe, how I structure ideas, and how I bring a more human, grounded tone into my work.\n\nSimply put, I know my audience, make things clear, and make content that actually works. Everything I write is structured, purposeful, and works well, from blogs that are based on search to brand messaging.\n\nI also work with AI-driven workflows to make research and structure better. Whatever I do, I make sure the end result is always clear, natural, and human.",
   aboutPerspective:
     "Travel and writing appear repeatedly across the source materials, and that perspective shows up in the work: curiosity, texture, and an instinct for making information feel human rather than mechanical.",
+  industries: [
+    "SaaS & B2B Tech",
+    "Finance & Insurance",
+    "Health & Wellness",
+    "Automotive",
+    "Fashion & Apparel",
+    "Travel & Hospitality",
+    "EdTech",
+    "Beauty & Jewelry",
+    "Home & Construction",
+    "Agriculture",
+    "Nonprofit & CSR",
+    "Marketing & Web Growth"
+  ],
+  coreSkills: [
+    "SEO Content Strategy",
+    "Content Audits & Optimization",
+    "Keyword Research & Topic Clustering",
+    "On-Page SEO & Internal Linking",
+    "Editorial Calendar Management",
+    "Thought Leadership & Long-Form Writing",
+    "Landing Page & Website Copy",
+    "Backlink-Focused Content Planning",
+    "Content Editing & Proofreading",
+    "Social Media Content Strategy",
+    "B2B & B2C Content Writing",
+    "Funnel-Stage / Search-Intent Mapping",
+    "Cross-Functional & Client Collaboration"
+  ],
   tools: [
     "WordPress",
     "Yoast SEO",
+    "Google Analytics (GA4)",
+    "Google Search Console",
+    "Ahrefs",
+    "SEMrush",
+    "Surfer SEO",
+    "Clearscope",
+    "MarketMuse",
+    "Screaming Frog",
+    "Similarweb",
+    "Google PageSpeed Insights",
     "Basecamp",
     "Slack",
     "Trello",
@@ -101,7 +150,7 @@ export const siteData = {
       role: "Content Strategist",
       period: "August 2024 - February 2026",
       points: [
-        "Built SEO blog strategies for international SaaS and tech brands including Forest Hill, Inventive, and Akiflow.",
+        "Built SEO blog strategies for international SaaS and tech brands.",
         "Wrote thought leadership, landing pages, and web content aligned with search intent and funnel stages.",
         "Supported AI-enhanced research, keyword clustering, internal linking, audits, and optimization workflows."
       ]
@@ -333,5 +382,59 @@ export const socialMediaGallery: SocialMediaItem[] = [
     image: "/images/deck-media/image21.png",
     alt: "Promotional creative for MSP Premium TMT bars",
     note: "A campaign-style social creative built around category relevance and brand visibility."
+  }
+];
+
+export const proofOfWork: ProofOfWorkItem[] = [
+  {
+    type: "AI Overview",
+    title: "Cited in Google's AI Overview",
+    brand: "Barossa Valley Seeds",
+    image: "/images/proof-of-work/ai-overview-healthiest-seeds.png",
+    alt: "Google AI Overview citing Barossa Valley Seeds for the search 'what are the healthiest seeds to eat'",
+    note: "Referenced as a top source for the search \"what are the healthiest seeds to eat.\""
+  },
+  {
+    type: "AI Overview",
+    title: "Cited in Google's AI Overview",
+    brand: "AE.R Skinlab",
+    image: "/images/proof-of-work/ai-overview-vitamin-b12-fruits.png",
+    alt: "Google AI Overview citing AE.R Skinlab for the search 'vitamin b12 fruits list'",
+    note: "Referenced as a top source for the search \"vitamin b12 fruits list.\"",
+    href: "https://aerskinlab.com/blogs/journal/vitamin-b12-rich-fruits"
+  },
+  {
+    type: "AI Overview",
+    title: "Cited in Google's AI Overview",
+    brand: "Barossa Valley Seeds",
+    image: "/images/proof-of-work/ai-overview-king-of-herbs.png",
+    alt: "Google AI Overview citing Barossa Valley Seeds for the search 'king of herbs'",
+    note: "Referenced as a top source for the search \"king of herbs.\""
+  },
+  {
+    type: "Search performance",
+    title: "Ranking and driving clicks",
+    brand: "Astrologer Maa Kalyani",
+    image: "/images/proof-of-work/gsc-love-marriage-prediction.png",
+    alt: "Google Search Console screenshot showing the Astrological Love Marriage Prediction article gaining clicks from a previous position of zero",
+    note: "\"Astrological Love Marriage Prediction by Birth Date\" went from zero clicks to 103 in 28 days.",
+    href: "https://astrologermaakalyani.com/love-marriage-prediction-by-date-of-birth/"
+  },
+  {
+    type: "Search performance",
+    title: "Ranking and driving clicks",
+    brand: "AE.R Skinlab",
+    image: "/images/proof-of-work/gsc-botox-vs-skin-tightening.png",
+    alt: "Google Search Console screenshot showing the Botox vs Skin Tightening article up 205 percent in clicks",
+    note: "\"Botox vs Skin Tightening: Which Fights Aging Better?\" grew clicks by 205% in 28 days.",
+    href: "https://aerskinlab.com/blogs/journal/skin-tightening-vs-botox"
+  },
+  {
+    type: "Search performance",
+    title: "Ranking and driving clicks",
+    brand: "Barossa Valley Seeds",
+    image: "/images/proof-of-work/gsc-seeds-trending.png",
+    alt: "Google Search Console screenshot showing the Which 7 Seeds Are Best for Good Health and Fitness article up 500 percent in clicks",
+    note: "\"Which 7 Seeds Are Best for Good Health and Fitness\" grew clicks by 500% in 28 days."
   }
 ];
