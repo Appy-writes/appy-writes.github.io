@@ -3,15 +3,15 @@ import { getCollection } from "astro:content";
 import CTASection from "../components/CTASection.astro";
 import Hero from "../components/Hero.astro";
 import NicheGrid from "../components/NicheGrid.astro";
+import ProofOfWork from "../components/ProofOfWork.astro";
 import WorkCard from "../components/WorkCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { nicheDefinitions, siteData } from "../data/site";
+import { siteData } from "../data/site";
 import { sortWorkEntries, withBase } from "../utils/content";
 
 const allWork = sortWorkEntries(await getCollection("work"), "featured");
 const featuredWork = allWork.filter((entry) => entry.data.featured).slice(0, 6);
 const hero = siteData.heroOptions[siteData.selectedHeroOption];
-const selectedNiche = Astro.url.searchParams.get("niche") ?? "";
 const stepPalette = [
   { base: "#8f4c31", soft: "#bf876b" },
   { base: "#9a5c40", soft: "#c18b71" },
@@ -34,28 +34,30 @@ const stepPalette = [
     rightImageAlt="Atrayee portrait"
   />
 
-  <section class="pb-14">
+  <section class="pb-14 md:pb-20">
     <div class="page-shell">
-      <div class="card-surface home-niche-panel rounded-[1.8rem] p-6 md:p-8">
-        <h2 class="text-center font-['Fraunces'] text-2xl tracking-[-0.03em] text-[var(--accent)] md:text-3xl">
-          Niches Atrayee has worked across
-        </h2>
-        <div class="mx-auto mt-6 grid max-w-5xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {nicheDefinitions.map((item) => (
-            <button
-              type="button"
-              class:list={[
-                "home-niche-button cursor-pointer justify-self-center text-center",
-                selectedNiche === item.slug && "is-active"
-              ]}
-              data-home-niche-button={item.slug}
-              aria-pressed={selectedNiche === item.slug ? "true" : "false"}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
+      <div>
+        <p class="eyebrow">Proof it works</p>
+        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Cited in AI Overviews. Ranking in real search results.</h2>
+        <p class="mt-4 max-w-3xl text-base text-[var(--muted)] md:text-lg">
+          Screenshots straight from Google Search and Search Console—showing the content actually getting found, cited, and clicked.
+        </p>
       </div>
+      <ProofOfWork />
+    </div>
+  </section>
+
+  <section id="niche-overview" class="pb-14 md:pb-20 scroll-mt-28">
+    <div class="page-shell">
+      <div class="mb-8">
+        <p class="eyebrow">Niche overview</p>
+        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Built for Your Industry, Not a Template</h2>
+        <p class="mt-4 max-w-3xl text-base text-[var(--muted)] md:text-lg">
+          From SaaS to skincare, the audience changes—so does the approach. Explore work by industry.
+        </p>
+      </div>
+
+      <NicheGrid entries={allWork} />
     </div>
   </section>
 
@@ -63,7 +65,7 @@ const stepPalette = [
     <div class="page-shell">
       <div>
         <p class="eyebrow">Featured work</p>
-        <h2 class="mt-3 text-5xl tracking-[-0.03em] md:text-6xl">A focused mix of SEO, editorial, and conversion-minded work.</h2>
+        <h2 class="mt-3 text-5xl tracking-[-0.03em] md:text-6xl">Real projects, real results—SEO strategy meets editorial craft.</h2>
       </div>
 
       <div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -84,24 +86,11 @@ const stepPalette = [
     </div>
   </section>
 
-  <section id="niche-overview" class="pb-14 md:pb-20 scroll-mt-28">
-    <div class="page-shell">
-      <div class="mb-8">
-        <p class="eyebrow">Niche overview</p>
-        <h2 class="mt-3 text-4xl tracking-[-0.03em] md:text-5xl">Work, Organised By How Teams Actually Hire</h2>
-        <p class="mt-4 max-w-3xl text-base text-[var(--muted)] md:text-lg">
-          Explore my work across industries. Each section highlights how I adapt content based on audience, intent, and business goals.
-        </p>
-      </div>
-      <NicheGrid entries={allWork} activeSlug={selectedNiche} />
-    </div>
-  </section>
-
   <section class="pb-14 md:pb-20">
     <div class="page-shell">
       <div class="process-heading space-y-4">
         <p class="eyebrow">How Atrayee works</p>
-        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">A Structured Approach To Content That Performs</h2>
+        <h2 class="text-4xl tracking-[-0.03em] md:text-5xl">No Guesswork. Just a Process That Works.</h2>
       </div>
 
       <div class="process-steps-grid mt-8 md:mt-10">
@@ -145,43 +134,12 @@ const stepPalette = [
   />
 </BaseLayout>
 
-<script is:inline define:vars={{ selectedNiche }}>
-  const overviewSection = document.getElementById("niche-overview");
-  const buttons = Array.from(document.querySelectorAll("[data-home-niche-button]"));
-  const cards = Array.from(document.querySelectorAll("[data-niche-card]"));
-
-  /**
-   * @param {string} slug
-   */
-  function setActiveNiche(slug) {
-    buttons.forEach((button) => {
-      if (!(button instanceof HTMLElement)) return;
-      const active = button.dataset.homeNicheButton === slug;
-      button.classList.toggle("is-active", active);
-      button.setAttribute("aria-pressed", active ? "true" : "false");
-    });
-
-    cards.forEach((card) => {
-      if (!(card instanceof HTMLElement)) return;
-      const active = card.dataset.nicheCard === slug;
-      card.classList.toggle("is-active", active);
-    });
-  }
-
+<script is:inline>
+  const selectedNiche = new URLSearchParams(window.location.search).get("niche");
   if (selectedNiche) {
-    setActiveNiche(selectedNiche);
-  }
-
-  buttons.forEach((button) => {
-    if (!(button instanceof HTMLButtonElement)) return;
-    button.addEventListener("click", () => {
-      const slug = button.dataset.homeNicheButton;
-      if (!slug) return;
-      setActiveNiche(slug);
-      overviewSection?.scrollIntoView({ behavior: "smooth", block: "start" });
-      const url = new URL(window.location.href);
-      url.searchParams.set("niche", slug);
-      window.history.replaceState({}, "", url.toString());
+    document.querySelectorAll("[data-niche-card]").forEach((card) => {
+      if (!(card instanceof HTMLElement)) return;
+      card.classList.toggle("is-active", card.dataset.nicheCard === selectedNiche);
     });
-  });
+  }
 </script>

@@ -1,0 +1,89 @@
+---
+import { proofOfWork } from "../data/site";
+import { withBase } from "../utils/content";
+---
+
+<div class="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+  {proofOfWork.map((item) => (
+    <article class="card-surface overflow-hidden rounded-[1.7rem]">
+      <button
+        type="button"
+        class="h-40 w-full overflow-hidden border-b border-[var(--line)] bg-[var(--paper-strong)] cursor-zoom-in"
+        data-lightbox-trigger
+        data-lightbox-src={withBase(item.image)}
+        data-lightbox-alt={item.alt}
+        aria-label={`Open larger view: ${item.title}`}
+      >
+        <img src={withBase(item.image)} alt={item.alt} class="h-full w-full object-cover object-top transition-transform duration-300 hover:scale-[1.02]" loading="lazy" />
+      </button>
+      <div class="p-6">
+        <div class="flex flex-wrap gap-2">
+          <span class="pill">{item.type}</span>
+          <span class="pill">{item.brand}</span>
+        </div>
+        <h3 class="mt-4 text-xl tracking-[-0.03em]">{item.title}</h3>
+        <p class="mt-3 text-sm text-[var(--muted)]">{item.note}</p>
+        {item.href && (
+          <div class="mt-4">
+            <a class="button-secondary" href={item.href} target="_blank" rel="noreferrer">View article</a>
+          </div>
+        )}
+      </div>
+    </article>
+  ))}
+</div>
+
+<div
+  id="proof-lightbox"
+  class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 p-4 md:p-10"
+  data-lightbox-overlay
+>
+  <button
+    type="button"
+    class="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-2xl leading-none text-white transition hover:bg-white/20"
+    data-lightbox-close
+    aria-label="Close"
+  >
+    &times;
+  </button>
+  <img src="" alt="" class="max-h-full max-w-full rounded-[1rem] object-contain" data-lightbox-image />
+</div>
+
+<script is:inline>
+  (function () {
+    const overlay = document.getElementById("proof-lightbox");
+    if (!overlay) return;
+    const image = overlay.querySelector("[data-lightbox-image]");
+    const triggers = document.querySelectorAll("[data-lightbox-trigger]");
+    const closeBtn = overlay.querySelector("[data-lightbox-close]");
+
+    function openLightbox(src, alt) {
+      image.setAttribute("src", src);
+      image.setAttribute("alt", alt || "");
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex");
+      image.setAttribute("src", "");
+      document.body.style.overflow = "";
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        openLightbox(trigger.getAttribute("data-lightbox-src"), trigger.getAttribute("data-lightbox-alt"));
+      });
+    });
+
+    closeBtn?.addEventListener("click", closeLightbox);
+    overlay.addEventListener("click", (event) => {
+      if (event.target === overlay) closeLightbox();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeLightbox();
+    });
+  })();
+</script>
